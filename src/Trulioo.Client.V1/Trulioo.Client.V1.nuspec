@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Trulioo.V1.Client.NET</id>
+    <version>$version$</version>
+    <title>Trulioo V1 Client for .NET</title>
+    <authors>Trulioo, Inc.</authors>
+    <owners>Trulioo, Inc.</owners>
+    <iconUrl>https://www.trulioo.com/wp-content/uploads/logo.png</iconUrl>
+    <licenseUrl>https://github.com/Trulioo/sdk-csharp-v1/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/Trulioo/sdk-csharp-v1</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>This package contains the Trulioo Client for consuming Trulioo's API V1.</description>
+    <copyright>2016 Trulioo</copyright>
+    <tags>Trulioo</tags>
+    <language>en-US</language>
+    <dependencies>
+      <group targetFramework="net461">
+        <dependency id="Newtonsoft.Json" version="8.0.3" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="bin\Release\Trulioo.Client.V1.dll" target="lib\net46" />
+  </files>
+</package>
