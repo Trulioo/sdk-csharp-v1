@@ -11,8 +11,17 @@ relre:/obj/
 relre:/bin/
 relre:/Bin/
 
-# Build structure
-relre:^Build/
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+build/
+[Bb]in/
+[Oo]bj/
+
+# ReSharper is a .NET coding add-in
+_ReSharper*/
+*.[Rr]e[Ss]harper
 
 # Misc
 glob:Thumbs.db
@@ -33,8 +42,11 @@ obj/
 *.suo
 *.user
 
+# Remainings from resolvings conflicts in Source Control
+*.orig
+
 # Visual Studio 2015 cache/options directory
-.vs/*
+.vs/
 
 # Include DLLs if they're in the NuGet packages directory
 !/packages/**

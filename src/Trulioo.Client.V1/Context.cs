@@ -69,7 +69,7 @@ namespace Trulioo.Client.V1
             if (_httpClient.DefaultRequestHeaders != null && _httpClient.DefaultRequestHeaders.Accept != null)
             {
                 _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                _httpClient.DefaultRequestHeaders.Add("User-Agent", "trulioo-sdk-csharp/1.0");
+                _httpClient.DefaultRequestHeaders.Add("User-Agent", "trulioo-sdk-csharp/1.1");
                 _httpClient.DefaultRequestHeaders.Add("Accept-Encoding", "gzip");
             }
         }
@@ -154,7 +154,7 @@ namespace Trulioo.Client.V1
         /// </returns>
         internal async Task<TReturn> GetAsync<TReturn>(Namespace ns, ResourceName resource)
         {
-            var response = await SendAsync<TReturn>(HttpMethod.Get, ns, resource).ConfigureAwait(false);
+            var response = await sendAsync<TReturn>(HttpMethod.Get, ns, resource).ConfigureAwait(false);
             return response;
         }
 
@@ -175,7 +175,7 @@ namespace Trulioo.Client.V1
         /// </returns>
         internal async Task PostAsync(Namespace ns, ResourceName resource, dynamic content = null)
         {
-            await SendAsync(HttpMethod.Post, ns, resource, content).ConfigureAwait(false);
+            await sendAsync(HttpMethod.Post, ns, resource, content).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -195,7 +195,7 @@ namespace Trulioo.Client.V1
         /// </returns>
         internal async Task<TReturn> PostAsync<TReturn>(Namespace ns, ResourceName resource, dynamic content = null)
         {
-            var response = await SendAsync<TReturn>(HttpMethod.Post, ns, resource, content).ConfigureAwait(false);
+            var response = await sendAsync<TReturn>(HttpMethod.Post, ns, resource, content).ConfigureAwait(false);
             return response;
         }
 
@@ -216,7 +216,7 @@ namespace Trulioo.Client.V1
         /// </returns>
         internal async Task<TReturn> PutAsync<TReturn>(Namespace ns, ResourceName resource, dynamic content = null)
         {
-            var response = await SendAsync<TReturn>(HttpMethod.Put, ns, resource, content).ConfigureAwait(false);
+            var response = await sendAsync<TReturn>(HttpMethod.Put, ns, resource, content).ConfigureAwait(false);
             return response;
         }
 
@@ -237,7 +237,7 @@ namespace Trulioo.Client.V1
         /// </returns>
         internal async Task PutAsync(Namespace ns, ResourceName resource, dynamic content = null)
         {
-            await SendAsync(HttpMethod.Put, ns, resource, content).ConfigureAwait(false);
+            await sendAsync(HttpMethod.Put, ns, resource, content).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -257,7 +257,7 @@ namespace Trulioo.Client.V1
         /// </returns>
         internal async Task DeleteAsync(Namespace ns, ResourceName resource, dynamic content = null)
         {
-            await SendAsync(HttpMethod.Delete, ns, resource, content).ConfigureAwait(false);
+            await sendAsync(HttpMethod.Delete, ns, resource, content).ConfigureAwait(false);
         }
 
         #endregion Methods
@@ -284,7 +284,7 @@ namespace Trulioo.Client.V1
             DateFormatHandling = DateFormatHandling.IsoDateFormat
         };
 
-        private Uri CreateServiceUri(Namespace ns, ResourceName name)
+        private Uri createServiceUri(Namespace ns, ResourceName name)
         {
             var builder = new StringBuilder("https://");
             builder.Append(Host);
@@ -296,7 +296,7 @@ namespace Trulioo.Client.V1
             return uri;
         }
 
-        private static StringContent GetStringContent(dynamic content)
+        private static StringContent getStringContent(dynamic content)
         {
             if (object.ReferenceEquals(content, null))
             {
@@ -305,9 +305,9 @@ namespace Trulioo.Client.V1
             return new StringContent(JsonConvert.SerializeObject(content, _jsonSerializerSettings), Encoding.UTF8, "application/json");
         }
 
-        private async Task<TReturn> SendAsync<TReturn>(HttpMethod httpMethod, Namespace ns, ResourceName resource, dynamic content = null)
+        private async Task<TReturn> sendAsync<TReturn>(HttpMethod httpMethod, Namespace ns, ResourceName resource, dynamic content = null)
         {
-            var response = await SendInternalAsync(httpMethod, ns, resource, content).ConfigureAwait(false);
+            var response = await sendInternalAsync(httpMethod, ns, resource, content).ConfigureAwait(false);
 
             var message = typeof(TReturn) == typeof(string)
                           ? await response.Content.ReadAsStringAsync().ConfigureAwait(false)
@@ -316,10 +316,10 @@ namespace Trulioo.Client.V1
             return message;
         }
 
-        private async Task<HttpResponseMessage> SendInternalAsync(HttpMethod httpMethod, Namespace ns, ResourceName resource, dynamic content = null)
+        private async Task<HttpResponseMessage> sendInternalAsync(HttpMethod httpMethod, Namespace ns, ResourceName resource, dynamic content = null)
         {
-            var serviceUri = CreateServiceUri(ns, resource);
-            var stringContent = GetStringContent(content);
+            var serviceUri = createServiceUri(ns, resource);
+            var stringContent = getStringContent(content);
 
             using (var request = new HttpRequestMessage(httpMethod, serviceUri) { Content = stringContent })
             {
@@ -328,7 +328,7 @@ namespace Trulioo.Client.V1
                 var response = await HttpClient.SendAsync(request, HttpCompletionOption.ResponseContentRead, CancellationToken.None).ConfigureAwait(false);
                 if (!response.IsSuccessStatusCode)
                 {
-                    await ThrowRequestExceptionAsync(response).ConfigureAwait(false);
+                    await throwRequestExceptionAsync(response).ConfigureAwait(false);
                 }
                 return response;
             }
@@ -343,10 +343,10 @@ namespace Trulioo.Client.V1
         /// <returns>
         /// A <see cref="Task"/> representing the operation.
         /// </returns>
-        private static async Task ThrowRequestExceptionAsync(HttpResponseMessage response)
+        private static async Task throwRequestExceptionAsync(HttpResponseMessage response)
         {
             var content = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            var error = ParseError(response.StatusCode, content);
+            var error = parseError(response.StatusCode, content);
 
             RequestException requestException;
             switch (response.StatusCode)
@@ -373,7 +373,7 @@ namespace Trulioo.Client.V1
             throw requestException;
         }
 
-        private static Error ParseError(HttpStatusCode statusCode, string content)
+        private static Error parseError(HttpStatusCode statusCode, string content)
         {
             Error error;
             try

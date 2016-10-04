@@ -35,5 +35,10 @@
         /// Passport information
         /// </summary>
         public Passport Passport { get; set; }
+
+        /// <summary>
+        /// Country Specific fields {"CountryCode" : "Field1" : "Value", "Field2" : "Value" }
+        /// </summary>
+        public CountrySpecific CountrySpecific { get; set; }
     }
 }

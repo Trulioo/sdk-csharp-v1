@@ -45,7 +45,7 @@ namespace Trulioo.Client.V1
         public async Task<VerifyResult> VerifyAsync(VerifyRequest request)
         {
             var resource = new ResourceName("verify");
-            var response = await Context.PostAsync<VerifyResult>(_verificationNamespace, resource, request).ConfigureAwait(false);
+            var response = await _context.PostAsync<VerifyResult>(_verificationNamespace, resource, request).ConfigureAwait(false);
             return response;
         }
 
@@ -57,7 +57,7 @@ namespace Trulioo.Client.V1
         public async Task<TransactionRecordResult> GetTransactionRecordAsync(string id)
         {
             var resource = new ResourceName("transactionrecord", id);
-            var response = await Context.GetAsync<TransactionRecordResult>(_verificationNamespace, resource).ConfigureAwait(false);
+            var response = await _context.GetAsync<TransactionRecordResult>(_verificationNamespace, resource).ConfigureAwait(false);
             return response;
         }
 
@@ -69,7 +69,7 @@ namespace Trulioo.Client.V1
         public async Task<TransactionRecordResult> GetTransactionRecordAddressAsync(string id)
         {
             var resource = new ResourceName("transactionrecord", id, "withaddress");
-            var response = await Context.GetAsync<TransactionRecordResult>(_verificationNamespace, resource).ConfigureAwait(false);
+            var response = await _context.GetAsync<TransactionRecordResult>(_verificationNamespace, resource).ConfigureAwait(false);
             return response;
         }
 
@@ -79,7 +79,7 @@ namespace Trulioo.Client.V1
 
         private readonly TruliooApiClient _service;
 
-        private Context Context { get { return _service?.Context; } }
+        private Context _context { get { return _service?.Context; } }
 
         private readonly Namespace _verificationNamespace = new Namespace("verifications");
 

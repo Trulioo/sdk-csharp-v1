@@ -51,6 +51,7 @@
     <Compile Include="Model\AdditionalFields.cs" />
     <Compile Include="Model\AppendedField.cs" />
     <Compile Include="Model\Communication.cs" />
+    <Compile Include="Model\CountrySpecific.cs" />
     <Compile Include="Model\DataField.cs" />
     <Compile Include="Model\DataFields.cs" />
     <Compile Include="Model\DatasourceField.cs" />
