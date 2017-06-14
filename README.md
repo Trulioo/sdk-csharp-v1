@@ -14,9 +14,7 @@ using Trulioo.Client.V1;
 
 var truliooClient = new TruliooApiClient("-- YOUR WEB SERVICE USER NAME --", "-- YOUR PASSWORD --"));
 
-var response = await truliooClient.Connection.TestAuthenticationAsync();
-
-var responseString = response.Result; //get result of the request
+var responseString = await truliooClient.Connection.TestAuthenticationAsync();
 
 ```
 

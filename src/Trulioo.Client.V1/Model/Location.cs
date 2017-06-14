@@ -1,4 +1,6 @@
-﻿namespace Trulioo.Client.V1.Model
+﻿using Trulioo.Client.V1.Model.LocationFields;
+
+namespace Trulioo.Client.V1.Model
 {
     /// <summary>
     /// 
