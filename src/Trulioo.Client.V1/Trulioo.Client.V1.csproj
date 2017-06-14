@@ -48,7 +48,6 @@
     <Compile Include="Compressor\GZipDecompressionHandler.cs" />
     <Compile Include="Connection.cs" />
     <Compile Include="IContextAware.cs" />
-    <Compile Include="Model\AdditionalFields.cs" />
     <Compile Include="Model\AppendedField.cs" />
     <Compile Include="Model\Communication.cs" />
     <Compile Include="Model\CountrySpecific.cs" />
@@ -58,8 +57,10 @@
     <Compile Include="Model\DatasourceResult.cs" />
     <Compile Include="Model\DriverLicence.cs" />
     <Compile Include="Model\Location.cs" />
+    <Compile Include="Model\LocationFields\AdditionalFields.cs" />
     <Compile Include="Model\NationalId.cs" />
     <Compile Include="Model\Passport.cs" />
+    <Compile Include="Model\PersonalInfoFields\AdditionalFields.cs" />
     <Compile Include="Model\PersonInfo.cs" />
     <Compile Include="Model\Record.cs" />
     <Compile Include="Model\TransactionRecordResult.cs" />
