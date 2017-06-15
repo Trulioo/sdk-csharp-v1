@@ -1,5 +1,9 @@
 # Trulioo SDK for C# Changelog
 
+## Version 2.1.4
+
+Fix dependency on Newtonsoft,  nuget was incorrectly marked as requiring v8, v9 was required
+
 ## Version 2.1.3
 
 Breaking change to add the correct Additional Fields to Person and Location
