@@ -1,6 +1,6 @@
 # Trulioo SDK for C# Changelog
 
-## Version 2.1.0
+## Version 2.1.3
 
 Breaking change to add the correct Additional Fields to Person and Location
 FullName for PersonInfo

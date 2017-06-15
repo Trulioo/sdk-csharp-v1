@@ -1,5 +1,5 @@
 # Trulioo SDK for C# #
-## Version 1.1.0
+## Version 2.1.3
 
 The Trulioo Software Development Kit (SDK) for C# contains library code designed to enable developers to customize the integration of GlobalGateway into your automated business processes or website.
 
