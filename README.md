@@ -13,7 +13,7 @@ Below is an example of initializing the Trulioo API client and test connection:
 ```csharp
 using Trulioo.Client.V1;
 
-var truliooClient = new TruliooApiClient("-- YOUR WEB SERVICE USER NAME --", "-- YOUR PASSWORD --"));
+var truliooClient = new TruliooApiClient("-- YOUR WEB SERVICE USER NAME --", "-- YOUR PASSWORD --");
 
 var responseString = await truliooClient.Connection.TestAuthenticationAsync();
 
