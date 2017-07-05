@@ -1,5 +1,10 @@
 # Trulioo SDK for C# Changelog
 
+## Version 2.1.5
+
+Added CountryCode and ConfigurationName in VerifyResult
+Added RecordRule in Record
+
 ## Version 2.1.4
 
 Fix dependency on Newtonsoft,  nuget was incorrectly marked as requiring v8, v9 was required

@@ -28,5 +28,9 @@ namespace Trulioo.Client.V1.Model
         ////</ul>
         /// </summary>
         public IEnumerable<ServiceError> Errors { get; set; }
+
+        public string CountryCode { get; set; }
+
+        public string ConfigurationName { get; set; }
     }
 }

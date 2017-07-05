@@ -24,5 +24,7 @@ namespace Trulioo.Client.V1.Model
         ////</ul>
         /// </summary>
         public IEnumerable<ServiceError> Errors { get; set; }
+
+        public RecordRule Rule { get; set; }
     }
 }
