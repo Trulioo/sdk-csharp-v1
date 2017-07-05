@@ -3,7 +3,7 @@
 ## Version 2.1.5
 
 Added CountryCode and ConfigurationName in VerifyResult
-Added RecordRule in Record
+Added Rule in Record
 
 ## Version 2.1.4
 
