@@ -31,6 +31,6 @@ namespace Trulioo.Client.V1.Model
 
         public string CountryCode { get; set; }
 
-        public string ConfigurationName { get; set; }
+        public string ProductName { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 
 ## Version 2.1.5
 
-Added CountryCode and ConfigurationName in VerifyResult
+Added CountryCode and ProductName in VerifyResult
 Added Rule in Record
 
 ## Version 2.1.4
