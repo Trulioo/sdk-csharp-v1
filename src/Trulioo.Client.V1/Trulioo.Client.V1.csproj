@@ -63,6 +63,7 @@
     <Compile Include="Model\PersonalInfoFields\AdditionalFields.cs" />
     <Compile Include="Model\PersonInfo.cs" />
     <Compile Include="Model\Record.cs" />
+    <Compile Include="Model\RecordRule.cs" />
     <Compile Include="Model\TransactionRecordResult.cs" />
     <Compile Include="Model\VerifyRequest.cs" />
     <Compile Include="Model\VerifyResult.cs" />
