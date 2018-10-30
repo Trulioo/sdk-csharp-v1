@@ -83,6 +83,14 @@ namespace Trulioo.Client.V1
             get { return _connection ?? (_connection = new Connection(this)); }
         }
 
+        /// <summary>
+        /// Gets the <see cref="Business"/> instance for this <see cref="TruliooApiClient"/>.
+        /// </summary>
+        public Business Business
+        {
+            get { return _business ?? (_business = new Business(this)); }
+        }
+
         #endregion Properties
 
         #region Methods
@@ -160,6 +168,8 @@ namespace Trulioo.Client.V1
         private Verification _verification;
 
         private Connection _connection;
+
+        private Business _business;
 
         private bool _disposed;
 
