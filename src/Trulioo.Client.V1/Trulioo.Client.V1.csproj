@@ -49,6 +49,8 @@
     <Compile Include="Connection.cs" />
     <Compile Include="IContextAware.cs" />
     <Compile Include="Model\AppendedField.cs" />
+    <Compile Include="Model\BusinessResult.cs" />
+    <Compile Include="Model\SearchRequest.cs" />
     <Compile Include="Model\Communication.cs" />
     <Compile Include="Model\CountrySpecific.cs" />
     <Compile Include="Model\DataField.cs" />
@@ -64,9 +66,11 @@
     <Compile Include="Model\PersonInfo.cs" />
     <Compile Include="Model\Record.cs" />
     <Compile Include="Model\RecordRule.cs" />
+    <Compile Include="Model\SearchResult.cs" />
     <Compile Include="Model\TransactionRecordResult.cs" />
     <Compile Include="Model\VerifyRequest.cs" />
     <Compile Include="Model\VerifyResult.cs" />
+    <Compile Include="Business.cs" />
     <Compile Include="Verification.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="Context.cs" />
