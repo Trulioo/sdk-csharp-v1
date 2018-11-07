@@ -49,6 +49,7 @@
     <Compile Include="Connection.cs" />
     <Compile Include="IContextAware.cs" />
     <Compile Include="Model\AppendedField.cs" />
+    <Compile Include="Model\Business.cs" />
     <Compile Include="Model\BusinessResult.cs" />
     <Compile Include="Model\SearchRequest.cs" />
     <Compile Include="Model\Communication.cs" />
