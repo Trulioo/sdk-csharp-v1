@@ -10,6 +10,9 @@
         /// </summary>
         public PersonInfo PersonInfo { get; set; }
 
+        /// <summary>
+        /// Business information
+        /// </summary>
         public Business Business { get; set; }
 
         /// <summary>
