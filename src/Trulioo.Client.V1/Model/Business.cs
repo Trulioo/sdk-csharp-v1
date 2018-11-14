@@ -15,17 +15,17 @@
         /// <summary>
         /// Day of incorporation of the business to be verified.
         /// </summary>
-        public int DayOfIncorporation { get; set; }
+        public int? DayOfIncorporation { get; set; }
 
         /// <summary>
         /// Month of incorporation of the business to be verified.
         /// </summary>
-        public int MonthOfIncorporation { get; set; }
+        public int? MonthOfIncorporation { get; set; }
 
         /// <summary>
         /// Year of incorporation of the business to be verified.
         /// </summary>
-        public int YearOfIncorporation { get; set; }
+        public int? YearOfIncorporation { get; set; }
 
         /// <summary>
         /// Jurisdiction Of Incorporation of the business to be verified. This is to be given as an ISO2 country code.

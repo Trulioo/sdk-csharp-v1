@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Configuration;
+using System.Linq;
 using System.Threading.Tasks;
 using Trulioo.Client.V1.Model;
 using Xunit;
@@ -33,7 +34,7 @@ namespace Trulioo.Client.V1.Tests
                 var response = await service.Verification.VerifyAsync(request);
 
                 //Assert
-                Assert.NotNull(response);
+                Assert.True(response.Record.Errors.Count() == 0);
             }
         }
     }
