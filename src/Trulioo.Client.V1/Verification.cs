@@ -62,6 +62,18 @@ namespace Trulioo.Client.V1
         }
 
         /// <summary>
+        /// Gets verbose transaction record information
+        /// </summary>
+        /// <param name="id"> TransactionRecordID of Transaction Record to be retreived </param>
+        /// <returns> Verbose Transaction Record Result of the TransactionRecordID </returns>
+        public async Task<TransactionRecordResult> GetTransactionRecordVerboseAsync(string id)
+        {
+            var resource = new ResourceName("transactionrecord", id, "verbose");
+            var response = await _context.GetAsync<TransactionRecordResult>(_verificationNamespace, resource).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary>
         /// Gets a transaction record with address cleansing information
         /// </summary>
         /// <param name="id"></param>
@@ -70,6 +82,18 @@ namespace Trulioo.Client.V1
         {
             var resource = new ResourceName("transactionrecord", id, "withaddress");
             var response = await _context.GetAsync<TransactionRecordResult>(_verificationNamespace, resource).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary>
+        /// Gets the status of a transaction
+        /// </summary>
+        /// <param name="id">TransactionID of the Transaction Status to be retreived </param>
+        /// <returns> Transaction Status of the transactionID </returns>
+        public async Task<TransactionStatus> GetTransactionStatusAsync(string id)
+        {
+            var resource = new ResourceName("transaction", id, "status");
+            var response = await _context.GetAsync<TransactionStatus>(_verificationNamespace, resource).ConfigureAwait(false);
             return response;
         }
 

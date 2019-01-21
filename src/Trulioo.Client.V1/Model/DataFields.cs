@@ -37,8 +37,21 @@
         public Passport Passport { get; set; }
 
         /// <summary>
-        /// Country Specific fields {"CountryCode" : "Field1" : "Value", "Field2" : "Value" }
+        /// CountrySpecific fields
+        /// {"CountryCode" : "Field1" : "Value",
+        /// "Field2" : "Value"
+        /// }
         /// </summary>
         public CountrySpecific CountrySpecific { get; set; }
+
+        /// <summary>
+        /// Document Information for Document Verification
+        /// </summary>
+        public Document Document { get; set; }
+
+        /// <summary>
+        /// Business information for Business Verification
+        /// </summary>
+        public Business Business { get; set; }
     }
 }

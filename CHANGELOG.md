@@ -1,5 +1,12 @@
 # Trulioo SDK for C# Changelog
 
+## Version 2.1.7.0
+
+Added new Methods from NAPI (GetTestEntities, GetDatasources, GetTransactionRecordVerbose, GetTransactionStatus, GetDocumentTypes, BusinessSearch, BusinessSearchResult)    
+Added new Models for Document and Business Verification
+Added new Fields in VerifyRequest to reflect NAPI  
+Created better Test Classes
+
 ## Version 2.1.5
 
 Added CountryCode and ProductName in VerifyResult
