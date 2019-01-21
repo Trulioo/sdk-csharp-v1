@@ -22,6 +22,11 @@
         /// </summary>
         Connection Connection { get; }
 
+        /// <summary>
+        /// Gets the <see cref="Business"/> instance for this <see cref="ITruliooApiClient"/>.
+        /// </summary>
+        Business Business { get; }
+
         #endregion Properties
     }
 }

@@ -11,6 +11,11 @@
         public PersonInfo PersonInfo { get; set; }
 
         /// <summary>
+        /// Business information
+        /// </summary>
+        public Business Business { get; set; }
+
+        /// <summary>
         /// Location Information
         /// </summary>
         public Location Location { get; set; }

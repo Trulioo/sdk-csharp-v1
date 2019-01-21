@@ -19,5 +19,7 @@ namespace Trulioo.Client.V1.Model
         public IEnumerable<ServiceError> Errors { get; set; }
 
         public IEnumerable<string> FieldGroups { get; set; }
+
+        public IEnumerable<BusinessResult> Results { get; set; }
     }
 }
