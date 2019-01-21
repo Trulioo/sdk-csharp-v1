@@ -17,10 +17,20 @@ namespace Trulioo.Client.V1.Model
         public bool Demo { get; set; }
 
         /// <summary>
+        /// If set, the transaction will run asyncronously and trulioo will try to update the client with transaction state updates until completed.
+        /// </summary>
+        public string CallBackUrl { get; set; }
+
+        /// <summary>
         /// set to true if you want to receive address cleanse information,
         /// This will only change the response if you have address cleansing enabled for the country you are querying for.
         /// </summary>
         public bool CleansedAddress { get; set; }
+
+        /// <summary>
+        /// Will update the client within the timeout in seconds. If failed to accomplish, the transaction will be cancelled.
+        /// </summary>
+        public int? Timeout { get; set; }
 
         /// <summary>
         /// Indicate the type of verification
@@ -42,8 +52,18 @@ namespace Trulioo.Client.V1.Model
         public string CountryCode { get; set; }
 
         /// <summary>
+        /// Used to send a Customer Reference ID which will be returned back in the response
+        /// </summary>
+        public string CustomerReferenceID { get; set; }
+
+        /// <summary>
         /// The data field name-value pairs for the data elements on which the verification is to be performed
         /// </summary>
         public DataFields DataFields { get; set; }
+
+        /// <summary>
+        /// Verbose Mode output flag. Default value will be false.
+        /// </summary>
+        public bool VerboseMode { get; set; }
     }
 }

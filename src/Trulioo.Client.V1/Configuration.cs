@@ -86,6 +86,52 @@ namespace Trulioo.Client.V1
             return response;
         }
 
+        /// <summary>
+        /// Gets a list of TestEntities as a list of DataFields objects
+        /// </summary>
+        /// <param name="countryCode"></param>
+        /// <param name="configurationName"></param>
+        /// <returns>List of Datafields object</returns>
+        public async Task<IEnumerable<DataFields>> GetTestEntitiesAsync(string countryCode, string configurationName)
+        {
+            var resource = new ResourceName("testentities", configurationName, countryCode);
+            var response = await _context.GetAsync<IList<DataFields>>(_configurationNamespace, resource).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary>
+        /// Gets a list of Datasources
+        /// </summary>
+        /// <param name="countryCode"></param>
+        /// <param name="configurationName"></param>
+        /// <returns> List of Datsource Group Countries </returns>
+        public async Task<IEnumerable<NormalizedDatasourceGroupCountry>> GetDatasourcesAsync(string countryCode, string configurationName)
+        {
+            var resource = new ResourceName("datasources", configurationName, countryCode);
+            var response = await _context.GetAsync<IList<NormalizedDatasourceGroupCountry>>(_configurationNamespace, resource).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary>
+        /// Gets a list of document types
+        /// </summary>
+        /// <param name="countryCode"></param>
+        /// <returns> Dictionary with Keys as the Country Codes and Values as list of document types for that country </returns>
+        public async Task<Dictionary<string, IList<string>>> GetDocumentTypesAsync(string countryCode = null)
+        {
+            ResourceName resource;
+            if (countryCode != null)
+            {
+                resource = new ResourceName("documentTypes", countryCode);
+            } else
+            {
+                resource = new ResourceName("documentTypes");
+            }
+            var response = await _context.GetAsync<Dictionary<string, IList<string>>>(_configurationNamespace, resource).ConfigureAwait(false);
+            return response;
+        }
+
+
         #endregion
 
         #region Privates/internals
