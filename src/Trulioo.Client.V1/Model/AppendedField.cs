@@ -14,8 +14,8 @@
         public string FieldName { get; set; }
 
         /// <summary>
-        /// 
+        /// can be string or Object(only if FieldName is WatchlistDetails)
         /// </summary>
-        public string Data { get; set; }
+        public dynamic Data { get; set; }
     }
 }
