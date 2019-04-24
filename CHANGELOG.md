@@ -1,5 +1,9 @@
 # Trulioo SDK for C# Changelog
 
+## Version 2.1.9.0
+
+Changed type of Model/AppendedField's Data from string to dynamic in order to allow WatchListDetails, returned as Dictionary, parsable.
+
 ## Version 2.1.7.0
 
 Added new Methods from NAPI (GetTestEntities, GetDatasources, GetTransactionRecordVerbose, GetTransactionStatus, GetDocumentTypes, BusinessSearch, BusinessSearchResult)    

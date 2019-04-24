@@ -84,5 +84,35 @@ namespace Trulioo.Client.V1.Tests
                 IsTimedOut = false
             } };
         }
+
+        // Tests if ApiClient throws Exception when parsing WatchListDetails in AppendedField
+        // This needs an account which has ComplyAdvantage V3 configured in Germany (or any country)
+        [Fact(Skip = "Calls API")]
+        public async Task WatchlistDetailsResponseNoExceptionThrownTest_TECH9_103()
+        {
+            using (var client = new TruliooApiClient(new Context("", "") { Host = "" }))
+            {
+                var request = new VerifyRequest
+                {
+                    AcceptTruliooTermsAndConditions = true,
+                    VerboseMode = true,
+                    Demo = false,
+                    ConfigurationName = "Identity Verification",
+                    CountryCode = "DE",
+                    DataFields = new DataFields
+                    {
+                        PersonInfo = new PersonInfo
+                        {
+                            FirstGivenName = "test",
+                            FirstSurName = "test",
+                            YearOfBirth = 1980
+                        }
+                    }
+                };
+
+                var response = await client.Verification.VerifyAsync(request);
+                Assert.NotNull(response);
+            }
+        }
     }
 }
