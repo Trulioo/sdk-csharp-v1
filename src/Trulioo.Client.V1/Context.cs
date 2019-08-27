@@ -152,9 +152,9 @@ namespace Trulioo.Client.V1
         /// <returns>
         /// The response to the GET request.
         /// </returns>
-        internal async Task<TReturn> GetAsync<TReturn>(Namespace ns, ResourceName resource)
+        internal async Task<TReturn> GetAsync<TReturn>(Namespace ns, ResourceName resource, Func<HttpResponseMessage, TReturn> processResponse = null)
         {
-            var response = await sendAsync<TReturn>(HttpMethod.Get, ns, resource).ConfigureAwait(false);
+            var response = await sendAsync<TReturn>(HttpMethod.Get, ns, resource, processResponse:processResponse).ConfigureAwait(false);
             return response;
         }
 
@@ -305,15 +305,18 @@ namespace Trulioo.Client.V1
             return new StringContent(JsonConvert.SerializeObject(content, _jsonSerializerSettings), Encoding.UTF8, "application/json");
         }
 
-        private async Task<TReturn> sendAsync<TReturn>(HttpMethod httpMethod, Namespace ns, ResourceName resource, dynamic content = null)
+        private async Task<TReturn> sendAsync<TReturn>(HttpMethod httpMethod, Namespace ns, ResourceName resource, dynamic content = null, Func<HttpResponseMessage, TReturn> processResponse = null)
         {
             var response = await sendInternalAsync(httpMethod, ns, resource, content).ConfigureAwait(false);
-
-            var message = typeof(TReturn) == typeof(string)
-                          ? await response.Content.ReadAsStringAsync().ConfigureAwait(false)
-                          : JsonConvert.DeserializeObject<TReturn>(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
-
-            return message;
+            if (processResponse != null)
+            {
+                return processResponse(response);
+            }
+            else
+            {
+                var rawMessage = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                return typeof(TReturn) == typeof(string) ? rawMessage : JsonConvert.DeserializeObject<TReturn>(rawMessage);
+            }
         }
 
         private async Task<HttpResponseMessage> sendInternalAsync(HttpMethod httpMethod, Namespace ns, ResourceName resource, dynamic content = null)

@@ -59,12 +59,14 @@
     <Compile Include="Model\BusinessSearch\SearchResult.cs" />
     <Compile Include="Model\BusinessSearch\SearchResultAddress.cs" />
     <Compile Include="Model\Communication.cs" />
+    <Compile Include="Model\Consent.cs" />
     <Compile Include="Model\CountrySpecific.cs" />
     <Compile Include="Model\DataField.cs" />
     <Compile Include="Model\DataFields.cs" />
     <Compile Include="Model\DatasourceField.cs" />
     <Compile Include="Model\DatasourceResult.cs" />
     <Compile Include="Model\Document.cs" />
+    <Compile Include="Model\DownloadDocument.cs" />
     <Compile Include="Model\DriverLicence.cs" />
     <Compile Include="Model\Location.cs" />
     <Compile Include="Model\LocationFields\AdditionalFields.cs" />

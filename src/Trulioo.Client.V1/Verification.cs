@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Trulioo.Client.V1.Model;
 using Trulioo.Client.V1.URI;
@@ -97,11 +101,42 @@ namespace Trulioo.Client.V1
             return response;
         }
 
-        #endregion
+        /// <summary>
+        /// Download Document
+        /// </summary>
+        /// <param name="transactionRecordId">id of the transactionrecord, this will be a GUID</param>
+        /// <param name="fieldName">document field name</param>
+        /// <returns>document</returns>
+        public async Task<DownloadDocument> GetDocumentDownload(string transactionRecordId, string fieldName)
+        {
+            var resource = new ResourceName("documentdownload", transactionRecordId, fieldName);
+            var response = await _context.GetAsync(_verificationNamespace, resource, processResponse: parseDownloadDocumentResponse).ConfigureAwait(false);
+            return await response;
+        }
 
-        #region Privates/internals
 
-        private readonly TruliooApiClient _service;
+    #endregion
+
+    #region Privates/internals
+    
+        private async Task<DownloadDocument> parseDownloadDocumentResponse(HttpResponseMessage response)
+        {
+            var rawMessage = await response.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
+
+            var filename = "downloadDocument.pdf";
+            if (response.Content.Headers.ContentDisposition?.FileName != null)
+            {
+                filename = response.Content.Headers.ContentDisposition.FileName;
+            }
+
+            return new DownloadDocument
+            {
+                DocumentName = filename,
+                DocumentContent = rawMessage
+            };
+        }
+
+    private readonly TruliooApiClient _service;
 
         private Context _context { get { return _service?.Context; } }
 

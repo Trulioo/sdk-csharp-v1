@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 using Trulioo.Client.V1.Model;
@@ -9,11 +10,15 @@ namespace Trulioo.Client.V1.Tests
 {
     public class VerificationFacts
     {
+        private readonly string _username = ConfigurationManager.AppSettings["username"];
+        private readonly string _password = ConfigurationManager.AppSettings["password"];
+        private readonly string _hostEndpoint = ConfigurationManager.AppSettings["host"];
+
         [Theory(Skip = "Calls API")]
         [MemberData(nameof(TransactionRecordVerboseTestData))]
-        public async Task GetTransactionRecordVerbose(string username, string password, string hostEndpoint, string transactionRecordID, TransactionRecordResult expectedTransactionRecordResult)
+        public async Task GetTransactionRecordVerbose(string transactionRecordID, TransactionRecordResult expectedTransactionRecordResult)
         {
-            using (var client = new TruliooApiClient(new Context(username, password) { Host = hostEndpoint}))
+            using (var client = new TruliooApiClient(new Context(_username, _password) { Host = _hostEndpoint }))
             {
                 var response = await client.Verification.GetTransactionRecordVerboseAsync(transactionRecordID);
 
@@ -38,9 +43,9 @@ namespace Trulioo.Client.V1.Tests
 
         public static IEnumerable<object[]> TransactionRecordVerboseTestData()
         {
-            yield return new object[] { "username", "password", "api.globaldatacompany.com", "0000-00000-000000", new TransactionRecordResult()
+            yield return new object[] {"transactionId", new TransactionRecordResult()
             {
-                InputFields = new List<DataField>() { new DataField { FieldName = "", Value=""} },
+                InputFields = new List<DataField>() { new DataField { FieldName = "", Value= "" }},
                 TransactionID = "",
                 Record = new Record()
                 {
@@ -62,9 +67,9 @@ namespace Trulioo.Client.V1.Tests
 
         [Theory(Skip = "Calls API")]
         [MemberData(nameof(TransactionStatusTestData))]
-        public async Task GetTransactionStatus(string username, string password, string hostEndpoint, string transactionID, TransactionStatus expectedTransactionStatus)
+        public async Task GetTransactionStatus(string transactionID, TransactionStatus expectedTransactionStatus)
         {
-            using (var client = new TruliooApiClient(new Context(username, password) { Host = hostEndpoint }))
+            using (var client = new TruliooApiClient(new Context(_username, _password) { Host = _hostEndpoint }))
             {
                 var response = await client.Verification.GetTransactionStatusAsync(transactionID);
                 Assert.Equal(expectedTransactionStatus.Status, response.Status);
@@ -76,7 +81,7 @@ namespace Trulioo.Client.V1.Tests
 
         public static IEnumerable<object[]> TransactionStatusTestData()
         {
-            yield return new object[] { "username", "password", "api.globaldatacompany.com", "transactionId", new TransactionStatus()
+            yield return new object[] {"transactionId", new TransactionStatus()
             {
                 TransactionId = "",
                 TransactionRecordId = "",
@@ -90,7 +95,7 @@ namespace Trulioo.Client.V1.Tests
         [Fact(Skip = "Calls API")]
         public async Task WatchlistDetailsResponseNoExceptionThrownTest_TECH9_103()
         {
-            using (var client = new TruliooApiClient(new Context("", "") { Host = "" }))
+            using (var client = new TruliooApiClient(new Context(_username, _password) { Host = _hostEndpoint }))
             {
                 var request = new VerifyRequest
                 {
@@ -113,6 +118,22 @@ namespace Trulioo.Client.V1.Tests
                 var response = await client.Verification.VerifyAsync(request);
                 Assert.NotNull(response);
             }
+        }
+
+        [Theory(Skip = "Calls API")]
+        [MemberData(nameof(DownloadDocData))]
+        public async Task GetDocumentDownload(string transactionRecordId, string fieldName)
+        {
+            using (var client = new TruliooApiClient(new Context(_username, _password) { Host = _hostEndpoint }))
+            {
+                var response = await client.Verification.GetDocumentDownload(transactionRecordId, fieldName);
+                Assert.NotNull(response);
+            }
+        }
+
+        public static IEnumerable<object[]> DownloadDocData()
+        {
+            yield return new object[] { "transactionRecordId", "fieldName" };
         }
     }
 }
