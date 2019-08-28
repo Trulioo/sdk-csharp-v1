@@ -1,5 +1,11 @@
 # Trulioo SDK for C# Changelog
 
+## Version 2.1.10.0
+
+Added new methods from NAPI (GetDetailedСonsents, GetRecommendedFields)
+Add optional processResponse parameter in Context Get method
+Update unit tests
+
 ## Version 2.1.9.0
 
 Changed type of Model/AppendedField's Data from string to dynamic in order to allow WatchListDetails, returned as Dictionary, parsable.
