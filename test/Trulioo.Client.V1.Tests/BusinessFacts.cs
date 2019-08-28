@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Collections.Generic;
 using System.Net;
 using Xunit;
@@ -12,11 +13,15 @@ namespace Trulioo.Client.V1.Tests
 {
     public class BusinessFacts
     {
+        private readonly string _username = ConfigurationManager.AppSettings["kyb_username"];
+        private readonly string _password = ConfigurationManager.AppSettings["kyb_password"];
+        private readonly string _hostEndpoint = ConfigurationManager.AppSettings["host"];
+
         [Theory(Skip = "Calls API")]
         [MemberData(nameof(BusinessSearchTestData))]
-        public async Task BusinessSearchTest(string username, string password, string hostEndpoint, BusinessSearchRequest request, BusinessSearchResponse expectedResponse)
+        public async Task BusinessSearchTest(BusinessSearchRequest request, BusinessSearchResponse expectedResponse)
         {
-            using (var client = new TruliooApiClient(new Context(username, password) { Host = hostEndpoint }))
+            using (var client = new TruliooApiClient(new Context(_username, _password) { Host = _hostEndpoint }))
             {
                 var response = await client.Business.BusinessSearchAsync(request);
                 
@@ -42,7 +47,7 @@ namespace Trulioo.Client.V1.Tests
 
         public static IEnumerable<object[]> BusinessSearchTestData()
         {
-            yield return new object[] { "username", "password", "api.globaldatacompany.com",
+            yield return new object[] {
                 new BusinessSearchRequest() {
                     AcceptTruliooTermsAndConditions = true,
                     CountryCode = "",
@@ -79,9 +84,9 @@ namespace Trulioo.Client.V1.Tests
 
         [Theory(Skip = "Calls API")]
         [MemberData(nameof(BusinessSearchResultTestData))]
-        public async Task BusinessSearchResultTest(string username, string password, string hostEndpoint, string transactionRecordId, BusinessSearchResponse expectedResponse)
+        public async Task BusinessSearchResultTest(string transactionRecordId, BusinessSearchResponse expectedResponse)
         {
-            using (var client = new TruliooApiClient(new Context(username, password) { Host = hostEndpoint }))
+            using (var client = new TruliooApiClient(new Context(_username, _password) { Host = _hostEndpoint }))
             {
                 var response = await client.Business.BusinessSearchResultAsync(transactionRecordId);
 
@@ -108,7 +113,7 @@ namespace Trulioo.Client.V1.Tests
 
         public static IEnumerable<object[]> BusinessSearchResultTestData()
         {
-            yield return new object[] { "username", "password", "api.globaldatacompany.com", "transactionRecordId",
+            yield return new object[] { "transactionRecordId",
                 new BusinessSearchResponse()
                 {
                     TransactionID = "",

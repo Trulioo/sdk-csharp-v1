@@ -51,6 +51,18 @@ namespace Trulioo.Client.V1
         }
 
         /// <summary>
+        /// Details about consents required for the provided country and configuration
+        /// </summary>
+        /// <param name="countryCode"></param>
+        /// <param name="configurationName"></param>
+        public async Task<IEnumerable<Consent>> GetDetailedСonsentsAsync(string countryCode, string configurationName)
+        {
+            var resource = new ResourceName("detailedConsents", configurationName, countryCode);
+            var response = await _context.GetAsync<IEnumerable<Consent>>(_configurationNamespace, resource).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary>
         /// Get Country Codes configured for your account
         /// </summary>
         /// <param name="configurationName"></param>
@@ -82,6 +94,19 @@ namespace Trulioo.Client.V1
         public async Task<Dictionary<string, dynamic>> GetFieldsAsync(string countryCode, string configurationName)
         {
             var resource = new ResourceName("fields", configurationName, countryCode);
+            var response = await _context.GetAsync<Dictionary<string, dynamic>>(_configurationNamespace, resource).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary>
+        /// Generates json schema for the API, the schema is dynamic based on the recommendedFields country and account you are using.
+        /// http://json-schema.org/documentation.html
+        /// </summary>
+        /// <param name="countryCode"></param>
+        /// <param name="configurationName"></param>
+        public async Task<Dictionary<string, dynamic>> GetRecommendedFieldsAsync(string countryCode, string configurationName)
+        {
+            var resource = new ResourceName("recommendedfields", configurationName, countryCode);
             var response = await _context.GetAsync<Dictionary<string, dynamic>>(_configurationNamespace, resource).ConfigureAwait(false);
             return response;
         }
