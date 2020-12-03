@@ -1,10 +1,9 @@
 # Trulioo SDK for C# Changelog
 
-## Version 2.1.10.0
+## Version 3.0.12.0
 
-Added new methods from NAPI (GetDetailedСonsents, GetRecommendedFields)
-Add optional processResponse parameter in Context Get method
-Update unit tests
+Updated library to .net Standard 2.0.  
+Breaking change to correct method name: GetDocumentDownload changed to GetDocumentDownloadAsync in Verification.cs
 
 ## Version 2.1.9.0
 

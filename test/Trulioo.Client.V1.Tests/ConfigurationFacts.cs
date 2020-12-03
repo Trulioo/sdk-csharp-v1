@@ -1,27 +1,22 @@
-﻿using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
-using Trulioo.Client.V1.Model;
-using Xunit;
-
-namespace Trulioo.Client.V1.Tests
+﻿namespace Trulioo.Client.V1.Tests
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Trulioo.Client.V1.Model;
+    using Xunit;
+    using System.Text.Json;
+
     public class ConfigurationFacts
     {
-        private readonly string _username = ConfigurationManager.AppSettings["username"];
-        private readonly string _password = ConfigurationManager.AppSettings["password"];
-        private readonly string _hostEndpoint = ConfigurationManager.AppSettings["host"];
-
         [Theory(Skip = "Calls API")]
         [MemberData(nameof(TestEntitiesTestData))]
         public async Task GetTestEntitiesTest(string countryCode, List<DataFields> expectedTestEntities)
         {
-            using (var client = new TruliooApiClient(new Context(_username, _password) { Host = _hostEndpoint }))
+            using (var client = Common.Basefact.GetTruliooClient())
             {
                 var response = await client.Configuration.GetTestEntitiesAsync(countryCode, "Identity Verification");
-          
+
                 Assert.Equal(expectedTestEntities.Count(), response.Count());
 
                 List<string> expectedFirstNames = expectedTestEntities.Where(f => f?.PersonInfo?.FirstGivenName != null).Select(f => f.PersonInfo.FirstGivenName).ToList();
@@ -46,10 +41,104 @@ namespace Trulioo.Client.V1.Tests
             }
         }
 
+        [Theory(Skip = "Calls API")]
+        [MemberData(nameof(DatasourcesTestData))]
+        public async Task GetDatasourcesTest(string countryCode, List<string> expectedDatasources)
+        {
+            using (var client = Common.Basefact.GetTruliooClient())
+            {
+                var response = await client.Configuration.GetDatasourcesAsync(countryCode, "Identity Verification");
+                List<string> datasources = response.Select(datasource => datasource.Name).ToList();
+                Assert.Equal(expectedDatasources.Count(), datasources.Count());
+                Assert.True(expectedDatasources.All(datasources.Contains));
+            }
+        }
+
+        [Fact(Skip = "Calls API")]
+        public async Task GetDocumentTypeAllCountries()
+        {
+            var expectedNumberOfCountries = 223;
+            using (var client = Common.Basefact.GetTruliooClient())
+            {
+                var response = await client.Configuration.GetDocumentTypesAsync();
+                Assert.Equal(expectedNumberOfCountries, response.Count());
+            }
+        }
+
+        [Theory(Skip = "Calls API")]
+        [MemberData(nameof(DocumentTypeTestData))]
+        public async Task GetDocumentTypeSpecificCountry(string countryCode, List<string> expectedDocumentTypes)
+        {
+            using (var client = Common.Basefact.GetTruliooClient())
+            {
+                var response = await client.Configuration.GetDocumentTypesAsync(countryCode);
+                Assert.Equal(expectedDocumentTypes.Count(), response[countryCode].Count());
+                Assert.True(expectedDocumentTypes.All(response[countryCode].Contains));
+            }
+        }
+
+        [Theory(Skip = "Calls API")]
+        [MemberData(nameof(ConsentsData))]
+        public async Task GetConsents(string countryCode, string configurationName, List<string> results)
+        {
+            using (var client = Common.Basefact.GetTruliooClient())
+            {
+                var response = await client.Configuration.GetСonsentsAsync(countryCode, configurationName);
+                Assert.NotNull(response);
+                Assert.Equal(results.Count(), response.Count());
+            }
+        }
+
+        [Theory(Skip = "Calls API")]
+        [MemberData(nameof(ConsentsData))]
+        public async Task GetDetailedConsents(string countryCode, string configurationName, List<string> results)
+        {
+            using (var client = Common.Basefact.GetTruliooClient())
+            {
+                var response = await client.Configuration.GetDetailedСonsentsAsync(countryCode, configurationName);
+                Assert.NotNull(response);
+                Assert.Equal(results.Count(), response.Count());
+            }
+        }
+
+        [Theory(Skip = "Calls API")]
+        [MemberData(nameof(RecommendedData))]
+        public async Task GetRecommendedFields(string countryCode, string configurationName)
+        {
+            using (var client = Common.Basefact.GetTruliooClient())
+            {
+                var response = await client.Configuration.GetRecommendedFieldsAsync(countryCode, configurationName);
+                Assert.NotNull(response);
+            }
+        }
+
+        public static IEnumerable<object[]> DatasourcesTestData()
+        {
+            yield return new object[] { Common.Basefact.CountryCode, Common.Basefact.DatasourcesTestList.Split(',').ToList() };
+        }
+
+        public static IEnumerable<object[]> DocumentTypeTestData()
+        {
+            yield return new object[] { Common.Basefact.CountryCode, Common.Basefact.DocumentTypeList.Split(',').ToList() };
+        }
+
+        public static IEnumerable<object[]> ConsentsData()
+        {
+            yield return new object[] { Common.Basefact.CountryCode, "Identity Verification", Common.Basefact.ConsentsList.Split(',').ToList() };
+        }
+
+        public static IEnumerable<object[]> RecommendedData()
+        {
+            yield return new object[] { Common.Basefact.CountryCode, "Identity Verification" };
+        }
+
         public static IEnumerable<object[]> TestEntitiesTestData()
         {
-            yield return new object[] {"AU",
-                new List<DataFields>() {
+            List<DataFields> testEntities;
+
+            if (string.IsNullOrWhiteSpace(Common.Basefact.TestEntities))
+            {
+                testEntities = new List<DataFields>() {
                     new DataFields() {
                         PersonInfo = new PersonInfo() {
                             FirstGivenName = "",
@@ -63,7 +152,7 @@ namespace Trulioo.Client.V1.Tests
                         Location = new Location()
                         {
                             BuildingNumber = "",
-                            UnitNumber= "",
+                            UnitNumber = "",
                             StreetName = "",
                             StreetType = "",
                             Suburb = "",
@@ -82,96 +171,16 @@ namespace Trulioo.Client.V1.Tests
                             MonthOfExpiry = 0
                         }
                     }
-                }
-            };
-        }
 
-        [Theory(Skip = "Calls API")]
-        [MemberData(nameof(DatasourcesTestData))]
-        public async Task GetDatasourcesTest(string countryCode, List<string> expectedDatasources)
-        {
-            using (var client = new TruliooApiClient(new Context(_username, _password) { Host = _hostEndpoint }))
-            {
-                var response = await client.Configuration.GetDatasourcesAsync(countryCode, "Identity Verification");
-                List<string> datasources = response.Select(datasource => datasource.Name).ToList();
-                Assert.Equal(expectedDatasources.Count(), datasources.Count());
-                Assert.True(expectedDatasources.All(datasources.Contains));
+                };
             }
-        }
-
-        public static IEnumerable<object[]> DatasourcesTestData()
-        {
-            yield return new object[] { "AU", new List<string>() { "" } };
-        }
-
-
-        [Fact(Skip = "Calls API")]
-        public async Task GetDocumentTypeAllCountries()
-        {
-            var expectedNumberOfCountries = 223;
-            using (var client = new TruliooApiClient(new Context(_username, _password) { Host = _hostEndpoint }))
+            else
             {
-                var response = await client.Configuration.GetDocumentTypesAsync();
-                Assert.Equal(expectedNumberOfCountries, response.Count());
+                testEntities = JsonSerializer.Deserialize<List<DataFields>>(Common.Basefact.TestEntities);
             }
-        }
-
-        [Theory(Skip = "Calls API")]
-        [MemberData(nameof(DocumentTypeTestData))]
-        public async Task GetDocumentTypeSpecificCountry(string countryCode, List<string> expectedDocumentTypes)
-        {
-            using (var client = new TruliooApiClient(new Context(_username, _password) { Host = _hostEndpoint }))
-            {
-                var response = await client.Configuration.GetDocumentTypesAsync(countryCode);
-                Assert.Equal(expectedDocumentTypes.Count(), response[countryCode].Count());
-                Assert.True(expectedDocumentTypes.All(response[countryCode].Contains));
-            }
-        }
-
-        [Theory(Skip = "Calls API")]
-        [MemberData(nameof(ConsentsData))]
-        public async Task GetConsents(string countryCode, string configurationName, List<string> results)
-        {
-            using (var client = new TruliooApiClient(new Context(_username, _password) { Host = _hostEndpoint }))
-            {
-                var response = await client.Configuration.GetСonsentsAsync(countryCode, configurationName);
-                Assert.NotNull(response);
-                Assert.Equal(results.Count(), response.Count());
-            }
-        }
-
-        [Theory(Skip = "Calls API")]
-        [MemberData(nameof(ConsentsData))]
-        public async Task GetDetailedConsents(string countryCode, string configurationName, List<string> results)
-        {
-            using (var client = new TruliooApiClient(new Context(_username, _password) { Host = _hostEndpoint }))
-            {
-                var response = await client.Configuration.GetDetailedСonsentsAsync(countryCode, configurationName);
-                Assert.NotNull(response);
-                Assert.Equal(results.Count(), response.Count());
-            }
-        }
 
 
-        [Theory(Skip = "Calls API")]
-        [MemberData(nameof(ConsentsData))]
-        public async Task GetRecommendedFields(string countryCode, string configurationName, List<string> results)
-        {
-            using (var client = new TruliooApiClient(new Context(_username, _password) { Host = _hostEndpoint }))
-            {
-                var response = await client.Configuration.GetRecommendedFieldsAsync(countryCode, configurationName);
-                Assert.NotNull(response);
-            }
-        }
-
-        public static IEnumerable<object[]> DocumentTypeTestData()
-        {
-            yield return new object[] { "countryCode", new List<string>() { ""} };
-        }
-
-        public static IEnumerable<object[]> ConsentsData()
-        {
-            yield return new object[] { "countryCode", "Identity Verification", new List<string> { "" } };
+            yield return new object[] { Common.Basefact.CountryCode, testEntities };
         }
 
     }

@@ -1,27 +1,18 @@
-﻿using System;
-using System.Configuration;
-using System.Collections.Generic;
-using System.Net;
-using Xunit;
-using System.Text;
-using System.Threading.Tasks;
-using Trulioo.Client.V1.Model.BusinessSearch;
-using static Trulioo.Client.V1.Model.BusinessSearch.BusinessSearchRequest;
-using System.Linq;
-
-namespace Trulioo.Client.V1.Tests
+﻿namespace Trulioo.Client.V1.Tests
 {
+    using System.Collections.Generic;
+    using Xunit;
+    using System.Threading.Tasks;
+    using Trulioo.Client.V1.Model.BusinessSearch;
+    using System.Linq;
+
     public class BusinessFacts
     {
-        private readonly string _username = ConfigurationManager.AppSettings["kyb_username"];
-        private readonly string _password = ConfigurationManager.AppSettings["kyb_password"];
-        private readonly string _hostEndpoint = ConfigurationManager.AppSettings["host"];
-
         [Theory(Skip = "Calls API")]
         [MemberData(nameof(BusinessSearchTestData))]
         public async Task BusinessSearchTest(BusinessSearchRequest request, BusinessSearchResponse expectedResponse)
         {
-            using (var client = new TruliooApiClient(new Context(_username, _password) { Host = _hostEndpoint }))
+            using (var client = Common.Basefact.GetTruliooKYBClient())
             {
                 var response = await client.Business.BusinessSearchAsync(request);
                 
@@ -86,7 +77,7 @@ namespace Trulioo.Client.V1.Tests
         [MemberData(nameof(BusinessSearchResultTestData))]
         public async Task BusinessSearchResultTest(string transactionRecordId, BusinessSearchResponse expectedResponse)
         {
-            using (var client = new TruliooApiClient(new Context(_username, _password) { Host = _hostEndpoint }))
+            using (var client = Common.Basefact.GetTruliooKYBClient())
             {
                 var response = await client.Business.BusinessSearchResultAsync(transactionRecordId);
 

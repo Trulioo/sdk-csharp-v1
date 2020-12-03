@@ -102,8 +102,8 @@ namespace Trulioo.Client.V1
         /// Generates json schema for the API, the schema is dynamic based on the recommendedFields country and account you are using.
         /// http://json-schema.org/documentation.html
         /// </summary>
-        /// <param name="countryCode"></param>
-        /// <param name="configurationName"></param>
+        /// <param name="countryCode">Call CountryCodes to get the countries available to you.</param>
+        /// <param name="configurationName">Identity Verification</param>
         public async Task<Dictionary<string, dynamic>> GetRecommendedFieldsAsync(string countryCode, string configurationName)
         {
             var resource = new ResourceName("recommendedfields", configurationName, countryCode);
