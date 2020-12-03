@@ -9,7 +9,7 @@
 	<Description>Trulioo.Client.V1 SDK</Description>
 	<Product>Trulioo.Client.V1</Product>
 
-    <Id>Trulioo.Client.V1</Id>
+    <PackageId>Trulioo.V1.Client.NET</PackageId>
     <Title>Trulioo V1 Client for .NET</Title>
     <Owners>Trulioo, Inc.</Owners>
     <IconUrl>http://api.trulioo.com/skins/trulioo/images/icon-default.png</IconUrl>
