@@ -1,35 +1,29 @@
-﻿using System.Net;
-using System.Configuration;
-using System.Collections.Generic;
-using Xunit;
-
-namespace Trulioo.Client.V1.Tests
+﻿namespace Trulioo.Client.V1.Tests
 {
+    using Xunit;
+
     public class Connection_Facts
     {
-        private readonly string _username = ConfigurationManager.AppSettings["username"];
-        private readonly string _password = ConfigurationManager.AppSettings["password"];
-        private readonly string _hostEndpoint = ConfigurationManager.AppSettings["host"];
 
-        [Fact(Skip = "Calls API")]
+        [Fact]
         public async void SayHello_Success()
         {
             //Arrange
-            using (var client = new TruliooApiClient(new Context(_username, _password) { Host = _hostEndpoint }))
+            using (var client = Common.Basefact.GetTruliooClient())
             {
-                var response = await client.Connection.SayHelloAsync(_username);
-                Assert.Contains(_username, response);
+                var response = await client.Connection.SayHelloAsync(Common.Basefact.UserName);
+                Assert.Contains(Common.Basefact.UserName, response);
             }
         }
 
-        [Fact(Skip = "Calls API")]
+        [Fact]
         public async void Authentication_Success()
         {
             //Arrange
-            using (var client = new TruliooApiClient(new Context(_username, _password) { Host = _hostEndpoint }))
+            using (var client = Common.Basefact.GetTruliooClient())
             {
                 var response = await client.Connection.TestAuthenticationAsync();
-                Assert.Contains(_username, response);
+                Assert.Contains(Common.Basefact.UserName, response);
             }
         }
     }

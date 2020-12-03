@@ -69,7 +69,7 @@ namespace Trulioo.Client.V1
             if (_httpClient.DefaultRequestHeaders != null && _httpClient.DefaultRequestHeaders.Accept != null)
             {
                 _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                _httpClient.DefaultRequestHeaders.Add("User-Agent", "trulioo-sdk-csharp/1.1");
+                _httpClient.DefaultRequestHeaders.Add("User-Agent", "trulioo-sdk-csharp/3.0");
                 _httpClient.DefaultRequestHeaders.Add("Accept-Encoding", "gzip");
             }
         }

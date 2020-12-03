@@ -18,6 +18,6 @@ namespace Trulioo.Client.V1.Model
         /// <summary>
         /// The content of the document
         /// </summary>   
-        public byte[] DocumentContent { get; set; }
+        public byte[] DocumentContent { get; set; }        
     }
 }

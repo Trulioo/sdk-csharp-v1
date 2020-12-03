@@ -107,7 +107,7 @@ namespace Trulioo.Client.V1
         /// <param name="transactionRecordId">id of the transactionrecord, this will be a GUID</param>
         /// <param name="fieldName">document field name</param>
         /// <returns>document</returns>
-        public async Task<DownloadDocument> GetDocumentDownload(string transactionRecordId, string fieldName)
+        public async Task<DownloadDocument> GetDocumentDownloadAsync(string transactionRecordId, string fieldName)
         {
             var resource = new ResourceName("documentdownload", transactionRecordId, fieldName);
             var response = await _context.GetAsync(_verificationNamespace, resource, processResponse: parseDownloadDocumentResponse).ConfigureAwait(false);
