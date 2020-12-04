@@ -1,6 +1,6 @@
 # Trulioo SDK for C# Changelog
 
-## Version 3.0.14.0
+## Version 3.0.15.0
 
 Updated library to .net Standard 2.0.  
 Breaking change to correct method name: GetDocumentDownload changed to GetDocumentDownloadAsync in Verification.cs
