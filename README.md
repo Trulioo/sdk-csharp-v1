@@ -25,7 +25,7 @@ var responseString = await truliooClient.Connection.TestAuthenticationAsync();
 #### Development environment
 
 ##### Visual Studio
-The Trulioo SDK for C# supports development in [Microsoft Visual Studio 2015](http://www.microsoft.com/visualstudio/downloads).
+The Trulioo SDK for C# supports development in [Microsoft Visual Studio 2019](https://visualstudio.microsoft.com/).
 
 ### Changelog
 
