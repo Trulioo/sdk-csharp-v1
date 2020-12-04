@@ -1,6 +1,4 @@
-﻿using Trulioo.Client.V1.Model.LocationFields;
-
-namespace Trulioo.Client.V1.Model
+﻿namespace Trulioo.Client.V1.Model
 {
     /// <summary>
     /// 
@@ -65,6 +63,6 @@ namespace Trulioo.Client.V1.Model
         /// <summary>
         /// Not normalized fields
         /// </summary>
-        public AdditionalFields AdditionalFields { get; set; }
+        public LocationFields.AdditionalFields AdditionalFields { get; set; }
     }
 }
