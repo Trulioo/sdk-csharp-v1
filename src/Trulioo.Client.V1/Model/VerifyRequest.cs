@@ -65,5 +65,10 @@ namespace Trulioo.Client.V1.Model
         /// Verbose Mode output flag. Default value will be false.
         /// </summary>
         public bool VerboseMode { get; set; }
+
+        /// <summary>
+        /// Used to send an ID which will be stored against the job to allow batch entries to be correlated 
+        /// </summary>
+        public string BatchRecordID { get; set; }
     }
 }
