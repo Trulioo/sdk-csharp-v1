@@ -56,5 +56,10 @@ namespace Trulioo.Client.V1.Model
         /// Whether or not to retrieve entity detail
         /// </summary>
         public bool? Entities { get; set; }
+
+        /// <summary>
+        /// A list of people or businesses to check for their matchstatus
+        /// </summary>
+        public List<PersonOfSignificantControl> PeopleOfSignificantControl { get; set; }
     }
 }
