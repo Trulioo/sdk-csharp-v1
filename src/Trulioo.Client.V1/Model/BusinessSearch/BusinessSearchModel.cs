@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Trulioo.Client.V1.Model.BusinessSearch
+﻿namespace Trulioo.Client.V1.Model.BusinessSearch
 {
     /// <summary>
     /// Search Model containing name-value pairs to be used for Business Search
@@ -15,6 +9,10 @@ namespace Trulioo.Client.V1.Model.BusinessSearch
         /// Name of the business to be verified
         /// </summary>
         public string BusinessName { get; set; }
+        /// <summary>
+        /// Website of the business
+        /// </summary>
+        public string Website { get; set; }
         /// <summary>
         /// Jurisdiction Of Incorporation of the business to be verified
         /// </summary>

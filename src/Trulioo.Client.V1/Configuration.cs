@@ -86,6 +86,39 @@ namespace Trulioo.Client.V1
         }
 
         /// <summary>
+        /// Gets the jurisdictions of incorporation for a country
+        /// </summary>
+        /// <param name="countryCode"></param>
+        /// <returns></returns>
+        public async Task<IEnumerable<CountrySubdivision>> GetCountryJOI(string countryCode)
+        {
+            var resource = new ResourceName("countryJOI", countryCode);
+            var response = await _context.GetAsync<IEnumerable<CountrySubdivision>>(_configurationNamespace, resource).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary>
+        /// Gets the currently configured business registration numbers, for country and an optionally supplied jurisdiction
+        /// </summary>
+        /// <param name="countryCode">Country alpha2 code, get via the call to https://developer.trulioo.com/reference#getcountrycodes </param>
+        /// <param name="jurisdictionCode">Optional jurisdiction code, get via the call to https://developer.trulioo.com/reference#getcountrysubdivisions </param>
+        /// <returns></returns>
+        public async Task<List<BusinessRegistrationNumber>> GetBusinessRegistrationNumbersAsync(string countryCode, string jurisdictionCode = null)
+        {
+            ResourceName resource;
+            if (!string.IsNullOrEmpty(jurisdictionCode))
+            {
+                resource = new ResourceName("businessregistrationnumbers", countryCode, jurisdictionCode);
+            }
+            else
+            {
+                resource = new ResourceName("businessregistrationnumbers", countryCode);
+            }
+            var response = await _context.GetAsync<List<BusinessRegistrationNumber>>(_configurationNamespace, resource).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary>
         /// Generates json schema for the API, the schema is dynamic based on the country and configuration you are using.
         /// </summary>
         /// <param name="countryCode"></param>
@@ -117,10 +150,10 @@ namespace Trulioo.Client.V1
         /// <param name="countryCode"></param>
         /// <param name="configurationName"></param>
         /// <returns>List of Datafields object</returns>
-        public async Task<IEnumerable<DataFields>> GetTestEntitiesAsync(string countryCode, string configurationName)
+        public async Task<IEnumerable<TestEntityDataFields>> GetTestEntitiesAsync(string countryCode, string configurationName)
         {
             var resource = new ResourceName("testentities", configurationName, countryCode);
-            var response = await _context.GetAsync<IList<DataFields>>(_configurationNamespace, resource).ConfigureAwait(false);
+            var response = await _context.GetAsync<IList<TestEntityDataFields>>(_configurationNamespace, resource).ConfigureAwait(false);
             return response;
         }
 

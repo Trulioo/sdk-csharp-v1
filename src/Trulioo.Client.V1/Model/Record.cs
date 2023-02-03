@@ -7,8 +7,19 @@ namespace Trulioo.Client.V1.Model
     {
         public string TransactionRecordID { get; set; }
 
+        /// <summary>
+        /// 'match' or 'nomatch' if the verification passed the rules configured on your account this will be 'match'.
+        /// </summary>
         public string RecordStatus { get; set; }
 
+        /// <summary>
+        /// 'match' or 'nomatch' if the secondary verification was run and passed the rules configured on your account this will be 'match'.
+        /// </summary>
+        public string SecondaryRecordStatus { get; set; }
+
+        /// <summary>
+        /// Results for each datasource that was queried
+        /// </summary>
         public IEnumerable<DatasourceResult> DatasourceResults { get; set; }
 
         /// <summary>
@@ -25,6 +36,9 @@ namespace Trulioo.Client.V1.Model
         /// </summary>
         public IEnumerable<ServiceError> Errors { get; set; }
 
+        /// <summary>
+        /// Rule used for record
+        /// </summary>
         public RecordRule Rule { get; set; }
     }
 }

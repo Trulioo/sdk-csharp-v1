@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace Trulioo.Client.V1.Model
 {
     public class VerifyRequest
@@ -7,9 +9,11 @@ namespace Trulioo.Client.V1.Model
         /// Indicate that Trulioo terms and conditions are accepted
         /// The Verification request will be executed only if the value of this header is passed as 'true'.
         /// </summary>
+        [Obsolete("Field no longer in use.", false)]
         public bool AcceptTruliooTermsAndConditions { get; set; }
 
         /// <summary>
+        ///  This field is not used anymore.  If provided it must match the setting on your account or you will get an error.
         ///  Indicate a demo verifications
         ///  If the value of pair is 'true', then the data passed will be matched against pre-configured test entities defined 
         ///  through the Trulioo web portal, the verification will not be charged to the customer. Default value for those pairs will be false.
@@ -22,15 +26,15 @@ namespace Trulioo.Client.V1.Model
         public string CallBackUrl { get; set; }
 
         /// <summary>
-        /// set to true if you want to receive address cleanse information,
-        /// This will only change the response if you have address cleansing enabled for the country you are querying for.
-        /// </summary>
-        public bool CleansedAddress { get; set; }
-
-        /// <summary>
         /// Will update the client within the timeout in seconds. If failed to accomplish, the transaction will be cancelled.
         /// </summary>
         public int? Timeout { get; set; }
+
+        /// <summary>
+        /// Set to true if you want to receive address cleanse information,
+        /// This will only change the response if you have address cleansing enabled for the country you are querying for.
+        /// </summary>
+        public bool CleansedAddress { get; set; }
 
         /// <summary>
         /// Indicate the type of verification
@@ -39,6 +43,8 @@ namespace Trulioo.Client.V1.Model
         public string ConfigurationName { get; set; }
 
         /// <summary>
+        /// Some datasources required your customer provide consent to access them.  Set that the customer has provided consent for each
+        /// datasource that requires one.  If consent is not provided the datasource will not be queried.
         /// The consent for the data sources which will be interrogated as a part of the request.
         /// Included only for the data sources which explicitly require consent
         /// </summary>

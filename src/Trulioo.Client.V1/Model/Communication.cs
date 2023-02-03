@@ -16,12 +16,13 @@
         public string Telephone { get; set; }
 
         /// <summary>
-        /// Email address of the individual to be verified
-        /// </summary>
-        public string EmailAddress { get; set; }
-        /// <summary>
         /// Additional Phone/Mobile Number of the individual to be verified
         /// </summary>
         public string Telephone2 { get; set; }
+
+        /// <summary>
+        /// Email address of the individual to be verified
+        /// </summary>
+        public string EmailAddress { get; set; }
     }
 }

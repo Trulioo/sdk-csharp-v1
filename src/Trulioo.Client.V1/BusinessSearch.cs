@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using Trulioo.Client.V1.Model;
 using Trulioo.Client.V1.Model.BusinessSearch;
 using Trulioo.Client.V1.URI;
 

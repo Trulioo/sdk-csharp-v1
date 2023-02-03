@@ -37,14 +37,6 @@
         public Passport Passport { get; set; }
 
         /// <summary>
-        /// CountrySpecific fields
-        /// {"CountryCode" : "Field1" : "Value",
-        /// "Field2" : "Value"
-        /// }
-        /// </summary>
-        public CountrySpecific CountrySpecific { get; set; }
-
-        /// <summary>
         /// Document Information for Document Verification
         /// </summary>
         public Document Document { get; set; }
@@ -53,5 +45,20 @@
         /// Business information for Business Verification
         /// </summary>
         public Business Business { get; set; }
+
+        /// <summary>
+        /// Risk monitoring options
+        /// </summary>
+        public RiskMonitorSettings Risk { get; set; }
+
+        /// <summary>
+        /// CountrySpecific fields
+        /// {"CountryCode" : "Field1" : "Value",
+        /// "Field2" : "Value"
+        /// }
+        ///
+        /// Call configuration/v1/fields/Identity Verification/countryCode to get the list of fields that are valid for your configuration
+        /// </summary>
+        public CountrySpecific CountrySpecific { get; set; }
     }
 }

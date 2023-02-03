@@ -15,6 +15,7 @@ namespace Trulioo.Client.V1.Model.BusinessSearch
         /// Indicate that Trulioo terms and conditions are accepted
         /// The Verification request will be executed only if the value of this header is passed as 'true'.
         /// </summary>
+        [Obsolete("This field is not used anymore. If provided, nothing will be affected.", false)]
         public bool AcceptTruliooTermsAndConditions { get; set; }
 
         /// <summary>
@@ -23,6 +24,14 @@ namespace Trulioo.Client.V1.Model.BusinessSearch
         public string CallBackUrl { get; set; }
 
         /// <summary>
+        /// The consent for the data sources which will be interrogated as a part of the request.
+        /// If set, trulioo will try to update the client syncronously within the timeout in seconds. If failed to accomplish, the transaction will be canceled.
+        /// </summary>
+        public int Timeout { get; set; }
+
+        /// <summary>
+        /// Some datasources required your customer provide consent to access them.  Set that the customer has provided consent for each
+        /// datasource that requires one.  If consent is not provided the datasource will not be queried.
         /// The consent for the data sources which will be interrogated as a part of the request.
         /// Included only for the data sources which explicitly require consent
         /// </summary>

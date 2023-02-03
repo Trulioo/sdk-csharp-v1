@@ -6,6 +6,9 @@ namespace Trulioo.Client.V1.Model
 {
     public class VerifyResult
     {
+        /// <summary>
+        /// The id for the transaction it will be a GUID
+        /// </summary>
         public string TransactionID { get; set; }
 
         /// <summary>
@@ -13,7 +16,25 @@ namespace Trulioo.Client.V1.Model
         /// </summary>
         public DateTime UploadedDt { get; set; }
 
+        /// <summary>
+        /// Time in UTC
+        /// </summary>
+        public DateTime? CompletedDt { get; set; }
+        /// <summary>
+        /// Country Code 
+        /// </summary>
+        public string CountryCode { get; set; }
+        /// <summary>
+        /// Product Name
+        /// </summary>
+        public string ProductName { get; set; }
+
         public Record Record { get; set; }
+
+        /// <summary>
+        /// Customer Reference Id
+        /// </summary>
+        public string CustomerReferenceID { get; set; }
 
         /// <summary>
         ////<ul>
@@ -28,9 +49,5 @@ namespace Trulioo.Client.V1.Model
         ////</ul>
         /// </summary>
         public IEnumerable<ServiceError> Errors { get; set; }
-
-        public string CountryCode { get; set; }
-
-        public string ProductName { get; set; }
     }
 }
