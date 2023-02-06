@@ -1,4 +1,7 @@
-﻿namespace Trulioo.Client.V1.Tests.Common
+﻿using System;
+using Trulioo.Client.V1.Model;
+
+namespace Trulioo.Client.V1.Tests.Common
 {
     using Microsoft.Extensions.Configuration;
     using System.IO;
@@ -57,6 +60,18 @@
                 Host = _host
             };
             return new TruliooApiClient(context);
+        }
+
+        public static TransactionStatus GetTransactionStatus()
+        {
+            return new TransactionStatus
+            {
+                TransactionId = TransactionId,
+                TransactionRecordId = TransactionRecordId,
+                Status = TransactionStatus,
+                UploadedDt = DateTime.Now,
+                IsTimedOut = false,
+            };
         }
 
         public static string UserName { get; private set; }

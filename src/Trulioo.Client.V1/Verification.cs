@@ -102,6 +102,18 @@ namespace Trulioo.Client.V1
         }
 
         /// <summary>
+        /// This method is used to retrieve the partial result of an asynchronous transaction.
+        /// </summary>
+        /// <param name="transactionId">id of the asynchronous transaction, this will be a GUID</param>
+        /// <returns>Partial Verify Result</returns>
+        public async Task<VerifyResultPartial> GetPartialResultAsync(string transactionId)
+        {
+            var resource = new ResourceName("transaction", transactionId, "partialresult");
+            var response = await _context.GetAsync<VerifyResultPartial>(_verificationNamespace, resource).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary>
         /// Download Document
         /// </summary>
         /// <param name="transactionRecordId">id of the transactionrecord, this will be a GUID</param>

@@ -18,7 +18,7 @@ namespace Trulioo.Client.V1.Model
         /// <summary>
         /// Status of the transaction. Possible Values: Uploading, Processing, Completed, InProgress, Failed, WaitAsync, ToBeResumed, Canceled, TimeoutCanceled. Call GetTransactionRecord when status changes to Completed, Failed, Canceled or TimeoutCanceled to get the verification results.
         /// </summary>
-        public String Status { get; set; }
+        public string Status { get; set; }
         /// <summary>
         /// Uploaded date for transaction
         /// </summary>

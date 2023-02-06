@@ -42,10 +42,12 @@
                 new BusinessSearchRequest() {
                     AcceptTruliooTermsAndConditions = true,
                     CountryCode = "",
+                    Timeout = 100,
                     Business = new BusinessSearchModel
                     {
                         BusinessName = "",
-                        JurisdictionOfIncorporation = ""
+                        JurisdictionOfIncorporation = "",
+                        Website = ""
                     }
                 },
                 new BusinessSearchResponse()
@@ -104,7 +106,7 @@
 
         public static IEnumerable<object[]> BusinessSearchResultTestData()
         {
-            yield return new object[] { "transactionRecordId",
+            yield return new object[] { Common.Basefact.TransactionRecordId,
                 new BusinessSearchResponse()
                 {
                     TransactionID = "",

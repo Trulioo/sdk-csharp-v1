@@ -61,6 +61,11 @@
         public string PostalCode { get; set; }
 
         /// <summary>
+        /// Post Office Box
+        /// </summary>
+        public string POBox { get; set; }
+
+        /// <summary>
         /// Not normalized fields
         /// </summary>
         public LocationFields.AdditionalFields AdditionalFields { get; set; }

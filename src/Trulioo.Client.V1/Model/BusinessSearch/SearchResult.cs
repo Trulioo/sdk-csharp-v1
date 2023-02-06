@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Trulioo.Client.V1.Model.BusinessSearch
 {
@@ -52,6 +48,10 @@ namespace Trulioo.Client.V1.Model.BusinessSearch
         /// </summary>
         public string BusinessStatus { get; set; }
         /// <summary>
+        /// Original Business Status
+        /// </summary>
+        public string OriginalBusinessStatus { get; set; }
+        /// <summary>
         /// Trade Style Name
         /// </summary>
         public string TradeStyleName { get; set; }
@@ -63,5 +63,45 @@ namespace Trulioo.Client.V1.Model.BusinessSearch
         /// Address Components
         /// </summary>
         public SearchResultAddress Address { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<string> OtherBusinessNames { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Website { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Telephone { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string TaxIDNumber { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<string> TaxIDNumbers { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string EmailAddress { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string WebDomain { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<string> WebDomains { get; set; }
+        /// <summary>
+        /// North American Industry Classification System
+        /// </summary>
+        public List<BusinessSearchResponseIndustryCode> NAICS { get; set; }
+        /// <summary>
+        /// Standard Industrial Classification
+        /// </summary>
+        public List<BusinessSearchResponseIndustryCode> SIC { get; set; }
     }
 }

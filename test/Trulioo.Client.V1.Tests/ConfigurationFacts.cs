@@ -11,7 +11,7 @@
     {
         [Theory(Skip = "Calls API")]
         [MemberData(nameof(TestEntitiesTestData))]
-        public async Task GetTestEntitiesTest(string countryCode, List<DataFields> expectedTestEntities)
+        public async Task GetTestEntitiesTest(string countryCode, List<TestEntityDataFields> expectedTestEntities)
         {
             using (var client = Common.Basefact.GetTruliooClient())
             {
@@ -112,6 +112,29 @@
             }
         }
 
+        [Theory(Skip = "Calls API")]
+        [InlineData("CA", null)]
+        [InlineData("CA", "BC")]
+        public async Task GetBusinessRegistrationNumbers(string countryCode, string jurisdiction)
+        {
+            using (var client = Common.Basefact.GetTruliooClient())
+            {
+                var response = await client.Configuration.GetBusinessRegistrationNumbersAsync(countryCode, jurisdiction);
+                Assert.NotNull(response);
+            }
+        }
+
+        [Theory(Skip = "Calls API")]
+        [InlineData("CA")]
+        public async Task GetCountryJOI(string countryCode)
+        {
+            using (var client = Common.Basefact.GetTruliooClient())
+            {
+                var response = await client.Configuration.GetCountryJOI(countryCode);
+                Assert.NotNull(response);
+            }
+        }
+
         public static IEnumerable<object[]> DatasourcesTestData()
         {
             yield return new object[] { Common.Basefact.CountryCode, Common.Basefact.DatasourcesTestList.Split(',').ToList() };
@@ -134,12 +157,12 @@
 
         public static IEnumerable<object[]> TestEntitiesTestData()
         {
-            List<DataFields> testEntities;
+            List<TestEntityDataFields> testEntities;
 
             if (string.IsNullOrWhiteSpace(Common.Basefact.TestEntities))
             {
-                testEntities = new List<DataFields>() {
-                    new DataFields() {
+                testEntities = new List<TestEntityDataFields>() {
+                    new TestEntityDataFields() {
                         PersonInfo = new PersonInfo() {
                             FirstGivenName = "",
                             MiddleName = "",
@@ -176,7 +199,7 @@
             }
             else
             {
-                testEntities = JsonSerializer.Deserialize<List<DataFields>>(Common.Basefact.TestEntities);
+                testEntities = JsonSerializer.Deserialize<List<TestEntityDataFields>>(Common.Basefact.TestEntities);
             }
 
 

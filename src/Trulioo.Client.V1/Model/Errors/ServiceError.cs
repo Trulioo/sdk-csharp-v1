@@ -1,5 +1,4 @@
-﻿
-namespace Trulioo.Client.V1.Model.Errors
+﻿namespace Trulioo.Client.V1.Model.Errors
 {
     public class ServiceError
     {

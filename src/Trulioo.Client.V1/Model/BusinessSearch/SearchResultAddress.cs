@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Trulioo.Client.V1.Model.BusinessSearch
+﻿namespace Trulioo.Client.V1.Model.BusinessSearch
 {
     /// <summary>
     /// Name value pairs of address found from business search
@@ -48,16 +42,24 @@ namespace Trulioo.Client.V1.Model.BusinessSearch
         /// </summary>
         public string PostalCode { get; set; }
         /// <summary>
-        /// Address Type
-        /// </summary>
-        public string AddressType { get; set; }
-        /// <summary>
         /// Address1
         /// </summary>
         public string Address1 { get; set; }
         /// <summary>
+        /// Address Type
+        /// </summary>
+        public string AddressType { get; set; }
+        /// <summary>
         /// State or province of address
         /// </summary>
         public string StateProvince { get; set; }
+        /// <summary>
+        ///
+        /// </summary>
+        public string Country { get; set; }
+        /// <summary>
+        ///
+        /// </summary>
+        public string CountryCode { get; set; }
     }
 }

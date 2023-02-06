@@ -1,5 +1,13 @@
 # Trulioo SDK for C# Changelog
 
+## Version 3.0.16.0
+
+Added new Methods from NAPI (GetCountryJOI, GetBusinessRegistrationNumbersAsync, GetPartialResultAsync)
+Updated Models for (Business, DataFields, DatasourceField, Location, Record, RecordRule, TransactionStatus, VerifyResultPartial, VerifyResult, BusinessSearchModel,
+					BusinessSearchRequest, SearchResult, SearchResultAddress)
+Created Models for (BusinessRegistrationNumber, BusinessRegistrationNumberMask, RiskMonitorSettings, TestEntityDataFields, BusinessSearchResponseIndustryCode)
+Updated Unit Tests
+
 ## Version 3.0.15.0
 
 Updated library to .net Standard 2.0.  
