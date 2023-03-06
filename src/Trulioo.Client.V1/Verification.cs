@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using Trulioo.Client.V1.Model;
 using Trulioo.Client.V1.URI;
 
@@ -126,11 +127,37 @@ namespace Trulioo.Client.V1
             return await response;
         }
 
+        /// <summary>
+        /// This method is used to retrieve the document of a verification performed using the verify method.
+        /// The response for this method includes the processed base64 JPEG formatted string
+        /// </summary>
+        /// <param name="transactionRecordID">id of the transactionrecord, this will be a GUID</param>
+        /// <param name="documentField">FieldName of the Document, this will be a string</param>
+        /// <returns>string</returns>
+        public async Task<string> GetTransactionRecordDocumentAsync(string transactionRecordID, string documentField)
+        {
+            var resource = new ResourceName("transactionrecord", transactionRecordID, documentField);
+            var responseTask = await _context.GetAsync(_verificationNamespace, resource, parseTransactionRecordDocumentResponse).ConfigureAwait(false);
+            return await responseTask;
+        }
 
-    #endregion
 
-    #region Privates/internals
-    
+        #endregion
+
+        #region Privates/internals
+
+        /// <summary>
+        /// Processes the string content from GetTransactionRecordDocument + Deserialize to escaped duplicate double quotes
+        /// </summary>
+        /// <param name="response"></param>
+        /// <returns></returns>
+        private async Task<string> parseTransactionRecordDocumentResponse(HttpResponseMessage response)
+        {
+            var message = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            message = JsonConvert.DeserializeObject<string>(message);
+            return message;
+        }
+
         private async Task<DownloadDocument> parseDownloadDocumentResponse(HttpResponseMessage response)
         {
             var rawMessage = await response.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
