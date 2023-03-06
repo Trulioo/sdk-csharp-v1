@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using Trulioo.Client.V1.Model;
 using Trulioo.Client.V1.URI;
 
@@ -92,9 +93,19 @@ namespace Trulioo.Client.V1
         /// <returns></returns>
         public async Task<IEnumerable<CountrySubdivision>> GetCountryJOI(string countryCode)
         {
+            IEnumerable<CountrySubdivision> countrySubdivisions = Array.Empty<CountrySubdivision>();
             var resource = new ResourceName("countryJOI", countryCode);
-            var response = await _context.GetAsync<IEnumerable<CountrySubdivision>>(_configurationNamespace, resource).ConfigureAwait(false);
-            return response;
+            try
+            {
+                countrySubdivisions = await _context
+                    .GetAsync<IEnumerable<CountrySubdivision>>(_configurationNamespace, resource).ConfigureAwait(false);
+            }
+            catch (JsonReaderException ex)
+            {
+                // Consuming JsonReaderException here: NAPI returns 200 with HTML content when countryCode is not found.
+            }
+
+            return countrySubdivisions;
         }
 
         /// <summary>

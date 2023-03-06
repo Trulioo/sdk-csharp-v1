@@ -150,7 +150,23 @@
             }
         }
 
+        [Theory]
+        [MemberData(nameof(TransactionRecordDocumentData))]
+        public async Task GetTransactionRecordDocument(string transactionRecordID, string documentField)
+        {
+            using (var client = Common.Basefact.GetTruliooClient())
+            {
+                var response = await client.Verification.GetTransactionRecordDocumentAsync("transactionRecordID", documentField);
+                Assert.NotNull(response);
+            }
+        }
+
         public static IEnumerable<object[]> DownloadDocData()
+        {
+            yield return new object[] { "transactionRecordId", "fieldName" };
+        }
+
+        public static IEnumerable<object[]> TransactionRecordDocumentData()
         {
             yield return new object[] { "transactionRecordId", "fieldName" };
         }
