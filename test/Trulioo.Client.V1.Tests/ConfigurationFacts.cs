@@ -6,6 +6,7 @@
     using Trulioo.Client.V1.Model;
     using Xunit;
     using System.Text.Json;
+    using System;
 
     public class ConfigurationFacts
     {
@@ -115,17 +116,30 @@
         [Theory(Skip = "Calls API")]
         [InlineData("CA", null)]
         [InlineData("CA", "BC")]
+        [InlineData(null, null)]
+        [InlineData(" ", "")]
+        [InlineData("", "BC")]
+        [InlineData(null, "BC")]
         public async Task GetBusinessRegistrationNumbers(string countryCode, string jurisdiction)
         {
             using (var client = Common.Basefact.GetTruliooClient())
             {
-                var response = await client.Configuration.GetBusinessRegistrationNumbersAsync(countryCode, jurisdiction);
-                Assert.NotNull(response);
+                if (string.IsNullOrWhiteSpace(countryCode) && !string.IsNullOrWhiteSpace(jurisdiction))
+                {
+                    await Assert.ThrowsAsync<ArgumentException>(async () => await client.Configuration.GetBusinessRegistrationNumbersAsync(countryCode, jurisdiction));
+                }
+                else
+                {
+                    var response = await client.Configuration.GetBusinessRegistrationNumbersAsync(countryCode, jurisdiction);
+                    Assert.NotNull(response);
+                }
             }
         }
 
         [Theory(Skip = "Calls API")]
         [InlineData("CA")]
+        [InlineData(null)]
+        [InlineData(" ")]
         public async Task GetCountryJOI(string countryCode)
         {
             using (var client = Common.Basefact.GetTruliooClient())
