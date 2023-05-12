@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Trulioo.Client.V1.Model;
@@ -87,14 +88,16 @@ namespace Trulioo.Client.V1
         }
 
         /// <summary>
-        /// Gets the jurisdictions of incorporation for a country
+        /// Gets all jurisdictions of incorporation for all countries if no country is supplied.
+        /// Gets the jurisdictions of incorporation for a country, if country is supplied.
         /// </summary>
-        /// <param name="countryCode"></param>
+        /// <param name="countryCode"> Optional country alpha2 code </param>
         /// <returns></returns>
-        public async Task<IEnumerable<CountrySubdivision>> GetCountryJOI(string countryCode)
+        public async Task<IEnumerable<CountrySubdivision>> GetCountryJOI(string countryCode = null)
         {
             IEnumerable<CountrySubdivision> countrySubdivisions = Array.Empty<CountrySubdivision>();
-            var resource = new ResourceName("countryJOI", countryCode);
+            var resourceParams = new List<string> { "countryJOI", countryCode }.Where(x => !string.IsNullOrWhiteSpace(x));
+            var resource = new ResourceName(resourceParams);
             try
             {
                 countrySubdivisions = await _context
@@ -109,22 +112,21 @@ namespace Trulioo.Client.V1
         }
 
         /// <summary>
-        /// Gets the currently configured business registration numbers, for country and an optionally supplied jurisdiction
+        /// Gets the currently configured business registration numbers, for optionally supplied country and jurisdiction
+        /// A country must be supplied in order to use a jurisdiction.
         /// </summary>
-        /// <param name="countryCode">Country alpha2 code, get via the call to https://developer.trulioo.com/reference#getcountrycodes </param>
-        /// <param name="jurisdictionCode">Optional jurisdiction code, get via the call to https://developer.trulioo.com/reference#getcountrysubdivisions </param>
+        /// <param name="countryCode"> Optional country alpha2 code, get via the call to https://developer.trulioo.com/reference#getcountrycodes </param>
+        /// <param name="jurisdictionCode"> Optional jurisdiction code, get via the call to https://developer.trulioo.com/reference#getcountrysubdivisions </param>
         /// <returns></returns>
-        public async Task<List<BusinessRegistrationNumber>> GetBusinessRegistrationNumbersAsync(string countryCode, string jurisdictionCode = null)
+        public async Task<List<BusinessRegistrationNumber>> GetBusinessRegistrationNumbersAsync(string countryCode = null, string jurisdictionCode = null)
         {
-            ResourceName resource;
-            if (!string.IsNullOrEmpty(jurisdictionCode))
+            if (string.IsNullOrWhiteSpace(countryCode) && !string.IsNullOrWhiteSpace(jurisdictionCode))
             {
-                resource = new ResourceName("businessregistrationnumbers", countryCode, jurisdictionCode);
+                throw new ArgumentException("Cannot use jurisdiction without a country.");
             }
-            else
-            {
-                resource = new ResourceName("businessregistrationnumbers", countryCode);
-            }
+
+            var resourceParams = new List<string> { "businessregistrationnumbers", countryCode, jurisdictionCode }.Where(x => !string.IsNullOrWhiteSpace(x));
+            var resource = new ResourceName(resourceParams);
             var response = await _context.GetAsync<List<BusinessRegistrationNumber>>(_configurationNamespace, resource).ConfigureAwait(false);
             return response;
         }
