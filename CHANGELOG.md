@@ -1,5 +1,9 @@
 # Trulioo SDK for C# Changelog
 
+## Version 3.0.35.0
+
+Add CountryCode field to CountrySubdivison model
+
 ## Version 3.0.34.0
 
 Updated methods from Napi (GetCountryJOI, GetBusinessRegistrationNumbersAsync) to get configurations for all countries through one call.
