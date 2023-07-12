@@ -175,11 +175,22 @@ namespace Trulioo.Client.V1
         /// </summary>
         /// <param name="countryCode"></param>
         /// <param name="configurationName"></param>
-        /// <returns> List of Datsource Group Countries </returns>
+        /// <returns> List of Datasource Group Countries </returns>
         public async Task<IEnumerable<NormalizedDatasourceGroupCountry>> GetDatasourcesAsync(string countryCode, string configurationName)
         {
             var resource = new ResourceName("datasources", configurationName, countryCode);
             var response = await _context.GetAsync<IList<NormalizedDatasourceGroupCountry>>(_configurationNamespace, resource).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary>
+        /// Gets all Datasources
+        /// </summary>
+        /// <returns> List of Datasource Group Countries </returns>
+        public async Task<IEnumerable<NormalizedDatasourceGroupsWithCountry>> GetAllDatasourcesAsync(string configurationName)
+        {
+            var resource = new ResourceName("alldatasources", configurationName);
+            var response = await _context.GetAsync<IList<NormalizedDatasourceGroupsWithCountry>>(_configurationNamespace, resource).ConfigureAwait(false);
             return response;
         }
 
