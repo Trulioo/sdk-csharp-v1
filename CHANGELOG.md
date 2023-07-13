@@ -1,5 +1,9 @@
 # Trulioo SDK for C# Changelog
 
+## Version 3.0.36.0
+
+Add GetAllDatasourcesAsync to Configuration
+
 ## Version 3.0.35.0
 
 Add CountryCode field to CountrySubdivison model

@@ -56,6 +56,22 @@
         }
 
         [Fact(Skip = "Calls API")]
+        public async Task GetAllDatasourcesTest()
+        {
+            using (var client = Common.Basefact.GetTruliooClient())
+            {
+                var response = await client.Configuration.GetAllDatasourcesAsync("Identity Verification");
+                var datasources = new List<string>();
+                foreach (var r in response)
+                {
+                    datasources.AddRange(r.Datasources.Select(d => d.Name));
+                }
+                Assert.NotEmpty(response);
+                Assert.NotEmpty(datasources);
+            }
+        }
+
+        [Fact(Skip = "Calls API")]
         public async Task GetDocumentTypeAllCountries()
         {
             var expectedNumberOfCountries = 223;
