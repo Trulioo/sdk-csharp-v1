@@ -1,5 +1,20 @@
 # Trulioo SDK for C# Changelog
 
+## Version 3.0.39.0
+
+Added new document types
+	- RegisterReport
+	- CreditCheck
+	- CreditReport
+	- GISAExtract
+	- VRExtract
+	- RegisterCheck
+	- TradeRegisterReport
+	- BeneficialOwnersCheck
+	- AnnualAccounts
+	- FiledChanges
+	- FiledDocuments
+
 ## Version 3.0.36.0
 
 Add GetAllDatasourcesAsync to Configuration
