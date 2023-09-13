@@ -96,5 +96,60 @@ namespace Trulioo.Client.V1.Model
         /// Whether or not to retrieve annual report document
         /// </summary>
         public bool? AnnualReport { get; set; }
+
+        /// <summary>
+        /// Whether or not to retrieve register report document
+        /// </summary>
+        public bool? RegisterReport { get; set; }
+
+        /// <summary>
+        /// Whether or not to retrieve credit check
+        /// </summary>
+        public bool? CreditCheck { get; set; }
+
+        /// <summary>
+        /// Whether or not to retrieve credit report document
+        /// </summary>
+        public bool? CreditReport { get; set; }
+
+        /// <summary>
+        /// Whether or not to retrieve GISA extract document
+        /// </summary>
+        public bool? GISAExtract { get; set; }
+
+        /// <summary>
+        /// Whether or not to retrieve VR extract document
+        /// </summary>
+        public bool? VRExtract { get; set; }
+
+        /// <summary>
+        /// Whether or not to retrieve register check document
+        /// </summary>
+        public bool? RegisterCheck { get; set; }
+
+        /// <summary>
+        /// Whether or not to retrieve trade register report document
+        /// </summary>
+        public bool? TradeRegisterReport { get; set; }
+
+        /// <summary>
+        /// Whether or not to retrieve beneficial owners check
+        /// </summary>
+        public bool? BeneficialOwnersCheck { get; set; }
+
+        /// <summary>
+        /// Whether or not to retrieve annual accounts document
+        /// </summary>
+        public bool? AnnualAccounts { get; set; }
+
+        /// <summary>
+        /// Whether or not to retrieve filed changes document
+        /// </summary>
+        public bool? FiledChanges { get; set; }
+
+        /// <summary>
+        /// Whether or not to retrieve filed documents
+        /// </summary>
+        public bool? FiledDocuments { get; set; }
     }
 }
