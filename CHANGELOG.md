@@ -1,5 +1,12 @@
 # Trulioo SDK for C# Changelog
 
+## Version 3.0.40.0
+
+Added new document types
+	- CompletePlus
+	- ArticleOfAuthority
+	- AgentAddressChange
+
 ## Version 3.0.39.0
 
 Added new document types
