@@ -130,11 +130,139 @@
                             FirstGivenName = "test",
                             FirstSurName = "test",
                             YearOfBirth = 1980
+                        },
+                    }
+                };
+
+                var response = await client.Verification.VerifyAsync(request);
+                Assert.NotNull(response);
+            }
+        }
+        
+        [Fact(Skip = "Calls API")]
+        public async Task IdvVerificationFact()
+        {
+            using (var client = Common.Basefact.GetTruliooClient())
+            {
+                var request = new VerifyRequest
+                {
+                    AcceptTruliooTermsAndConditions = true,
+                    VerboseMode = true,
+                    Demo = false,
+                    ConfigurationName = "Identity Verification",
+                    CountryCode = "CA",
+                    CustomerReferenceID = "CustomerReferenceID-1",
+                    DataFields = new DataFields
+                    {
+                        PersonInfo = new PersonInfo
+                        {
+                            FirstGivenName = "test",
+                            FirstSurName = "test",
+                            YearOfBirth = 1980
+                        },
+                        Communication = new Communication
+                        {
+                            EmailAddress = "email@trulioo.com"
+                        },
+                        Risk = new RiskMonitorSettings
+                        {
+                            Action = "Action",
+                            CallbackUrl = "CallbackUrl",
+                            DeviceID = "DeviceID",
+                            Email = "Email",
+                            Frequency = "Frequency",
+                            IP = "IP",
+                            Phone = "Phone",
+                            UserAgent = "UserAgent",
+                        },
+                        Location = new Location()
+                        {
+                            POBox = "POBox",
                         }
                     }
                 };
 
                 var response = await client.Verification.VerifyAsync(request);
+                Assert.NotNull(response);
+            }
+        }
+
+        [Fact(Skip = "Calls API")]
+        public async Task KybVerificationTask()
+        {
+            using (var client = Common.Basefact.GetTruliooKYBClient())
+            {
+                var request = new VerifyRequest
+                {
+                    VerboseMode = true,
+                    Demo = false,
+                    ConfigurationName = "Identity Verification",
+                    CountryCode = "CA",
+                    DataFields = new DataFields
+                    {
+                        Business = new Business
+                        {
+                            BusinessName = "BusinessName",
+                            TradestyleName = "TradestyleName",
+                            TaxIDNumber = "TaxIDNumber",
+                            BusinessRegistrationNumber = "BusinessRegistrationNumber",
+                            DayOfIncorporation = 1,
+                            MonthOfIncorporation = 2,
+                            YearOfIncorporation = 2003,
+                            JurisdictionOfIncorporation = "JurisdictionOfIncorporation",
+                            ShareholderListDocument = true,
+                            FinancialInformationDocument = true,
+                            EnhancedProfile = true,
+                            DunsNumber = "DunsNumber",
+                            Entities = true,
+                            PeopleOfSignificantControl = new List<PersonOfSignificantControl>
+                            {
+                                new PersonOfSignificantControl
+                                {
+                                    FirstGivenName = "FirstGivenName",
+                                    MiddleName = "MiddleName",
+                                    FirstSurName = "FirstSurName",
+                                    SecondSurname = "SecondSurname",
+                                    FullName = "FullName",
+                                    BusinessName = "BusinessName",
+                                    YearOfBirth = "YearOfBirth",
+                                    MonthOfBirth = "MonthOfBirth",
+                                    DayOfBirth = "DayOfBirth",
+                                }
+                            },
+                            Filings = true,
+                            ArticleOfAssociation = true,
+                            RegistrationDetails = true,
+                            AnnualReport = true,
+                            RegisterReport = true,
+                            CreditCheck = true,
+                            CreditReport = true,
+                            GISAExtract = true,
+                            VRExtract = true,
+                            RegisterCheck = true,
+                            TradeRegisterReport = true,
+                            BeneficialOwnersCheck = true,
+                            AnnualAccounts = true,
+                            FiledChanges = true,
+                            FiledDocuments = true,
+                            AgentAddressChange = true,
+                            ArticleOfAuthority = true,
+                            CompletePlus = true
+                        }
+                    }
+                };
+
+                var response = await client.Verification.VerifyAsync(request);
+                Assert.NotNull(response);
+            }
+        }
+
+        [Fact(Skip = "Calls API")]
+        public async Task GePartialResults()
+        {
+            using (var client = Common.Basefact.GetTruliooKYBClient())
+            {
+                var response = await client.Verification.GetPartialResultAsync(Common.Basefact.TransactionId);
                 Assert.NotNull(response);
             }
         }
@@ -156,7 +284,7 @@
         {
             using (var client = Common.Basefact.GetTruliooClient())
             {
-                var response = await client.Verification.GetTransactionRecordDocumentAsync("transactionRecordID", documentField);
+                var response = await client.Verification.GetTransactionRecordDocumentAsync(transactionRecordID, documentField);
                 Assert.NotNull(response);
             }
         }

@@ -141,11 +141,10 @@ namespace Trulioo.Client.V1
             return await responseTask;
         }
 
-
         #endregion
 
         #region Privates/internals
-
+        
         /// <summary>
         /// Processes the string content from GetTransactionRecordDocument + Deserialize to escaped duplicate double quotes
         /// </summary>
