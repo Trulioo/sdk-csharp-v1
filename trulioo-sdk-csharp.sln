@@ -25,7 +25,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{41648B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trulioo.Client.V1", "src\Trulioo.Client.V1\Trulioo.Client.V1.csproj", "{999CDACC-1CBB-433C-BD9C-09D31364E90B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trulioo.Client.V1.Tests", "test\Trulioo.Client.V1.Tests\Trulioo.Client.V1.Tests.csproj", "{9920104F-36AE-4C77-827E-9B01B97D8392}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trulioo.Client.V1.Tests", "tests\Trulioo.Client.V1.Tests\Trulioo.Client.V1.Tests.csproj", "{9920104F-36AE-4C77-827E-9B01B97D8392}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

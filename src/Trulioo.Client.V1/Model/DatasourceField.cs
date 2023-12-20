@@ -15,14 +15,8 @@
         /// </summary>
         public string Status { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
         public string TruMatchValue { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
         public string TruMatchThreshold { get; set; }
 
         /// <summary>

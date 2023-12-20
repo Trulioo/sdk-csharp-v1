@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using Trulioo.Client.V1.Model;
+    using Model;
     using Xunit;
     using System.Text.Json;
     using System;
@@ -54,7 +54,7 @@
                 Assert.True(expectedDatasources.All(datasources.Contains));
             }
         }
-
+        
         [Fact(Skip = "Calls API")]
         public async Task GetAllDatasourcesTest()
         {
@@ -62,10 +62,12 @@
             {
                 var response = await client.Configuration.GetAllDatasourcesAsync("Identity Verification");
                 var datasources = new List<string>();
+
                 foreach (var r in response)
                 {
                     datasources.AddRange(r.Datasources.Select(d => d.Name));
                 }
+
                 Assert.NotEmpty(response);
                 Assert.NotEmpty(datasources);
             }

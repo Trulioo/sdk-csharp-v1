@@ -9,10 +9,12 @@
         /// Optional first given name for the PSC
         /// </summary>
         public string FirstGivenName { get; set; }
+
         /// <summary>
         /// Optional middle name for the PSC
         /// </summary>
         public string MiddleName { get; set; }
+
         /// <summary>
         /// Optional first surname for the PSC
         /// </summary>

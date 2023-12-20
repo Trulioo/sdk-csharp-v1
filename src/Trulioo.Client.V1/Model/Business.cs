@@ -166,5 +166,6 @@ namespace Trulioo.Client.V1.Model
         /// Whether or not to retrieve agent address change document
         /// </summary>
         public bool? AgentAddressChange { get; set; }
+
     }
 }

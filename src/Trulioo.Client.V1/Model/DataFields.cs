@@ -40,7 +40,7 @@
         /// Document Information for Document Verification
         /// </summary>
         public Document Document { get; set; }
-
+        
         /// <summary>
         /// Business information for Business Verification
         /// </summary>

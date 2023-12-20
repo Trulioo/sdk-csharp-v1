@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+
 namespace Trulioo.Client.V1.Model
 {
     /// <summary>
@@ -10,6 +11,7 @@ namespace Trulioo.Client.V1.Model
         /// Country
         /// </summary>
         public string Country { get; set; }
+
         /// <summary>
         /// Datasources
         /// </summary>
