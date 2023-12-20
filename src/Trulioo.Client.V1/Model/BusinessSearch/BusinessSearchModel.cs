@@ -9,10 +9,12 @@
         /// Name of the business to be verified
         /// </summary>
         public string BusinessName { get; set; }
+        
         /// <summary>
         /// Website of the business
         /// </summary>
         public string Website { get; set; }
+
         /// <summary>
         /// Jurisdiction Of Incorporation of the business to be verified
         /// </summary>

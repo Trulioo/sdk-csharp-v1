@@ -5,7 +5,7 @@
     public class Connection_Facts
     {
 
-        [Fact(Skip = "Calls API")]
+        [Fact]
         public async void SayHello_Success()
         {
             //Arrange
@@ -16,7 +16,7 @@
             }
         }
 
-        [Fact(Skip = "Calls API")]
+        [Fact]
         public async void Authentication_Success()
         {
             //Arrange
