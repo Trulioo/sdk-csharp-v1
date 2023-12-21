@@ -41,13 +41,13 @@
             yield return new object[] {
                 new BusinessSearchRequest() {
                     AcceptTruliooTermsAndConditions = true,
-                    CountryCode = "",
+                    CountryCode = "CA",
                     Timeout = 100,
                     Business = new BusinessSearchModel
                     {
-                        BusinessName = "",
-                        JurisdictionOfIncorporation = "",
-                        Website = ""
+                        BusinessName = "businessname",
+                        JurisdictionOfIncorporation = "BC",
+                        Website = "website",
                     }
                 },
                 new BusinessSearchResponse()

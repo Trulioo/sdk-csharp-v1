@@ -6,6 +6,7 @@ namespace Trulioo.Client.V1.Model
 {
     public class VerifyResult
     {
+
         /// <summary>
         /// The id for the transaction it will be a GUID
         /// </summary>
@@ -20,10 +21,12 @@ namespace Trulioo.Client.V1.Model
         /// Time in UTC
         /// </summary>
         public DateTime? CompletedDt { get; set; }
+
         /// <summary>
         /// Country Code 
         /// </summary>
         public string CountryCode { get; set; }
+
         /// <summary>
         /// Product Name
         /// </summary>

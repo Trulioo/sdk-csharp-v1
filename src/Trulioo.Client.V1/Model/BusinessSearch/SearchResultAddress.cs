@@ -50,7 +50,7 @@
         /// </summary>
         public string AddressType { get; set; }
         /// <summary>
-        /// State or province of address
+        /// State Province
         /// </summary>
         public string StateProvince { get; set; }
         /// <summary>
