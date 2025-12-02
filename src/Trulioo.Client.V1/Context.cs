@@ -84,7 +84,7 @@ namespace Trulioo.Client.V1
         /// <value>
         /// A Trulioo host name.
         /// </value>
-        public string Host { get; set; } = "api.globaldatacompany.com";
+        public string Host { get; set; } = "api.trulioo.com";
 
         #endregion Properties
 
